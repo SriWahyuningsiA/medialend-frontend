@@ -184,7 +184,7 @@ if (res.data.user.nim) {
 
           {/* LEFT */}
 
-          <div className="w-5/12 relative border-r border-white/10 px-10 py-10 flex flex-col justify-between">
+          <div className="w-5/12 border-r border-white/10 px-12 py-12 flex flex-col justify-center">
 
             <div>
 
@@ -197,11 +197,13 @@ if (res.data.user.nim) {
 
               </h1>
 
-              <p className="text-white/70 text-sm leading-7 mt-6 max-w-md">
+              <p className="text-white/70 text-base leading-8 mt-8 max-w-md">
 
-                Sistem peminjaman alat multimedia kampus modern dengan tampilan realtime dan dashboard interaktif.
+              Platform digital untuk memudahkan proses
+              peminjaman alat multimedia kampus secara
+              cepat, aman, dan terintegrasi.
 
-              </p>
+            </p>
 
             </div>
 
@@ -211,18 +213,6 @@ if (res.data.user.nim) {
               <Feature text="Peminjaman cepat & efisien" />
               <Feature text="Riwayat otomatis tersimpan" />
               <Feature text="Akses dashboard mahasiswa & admin" />
-
-            </div>
-
-            <div className="bg-white/10 border border-white/10 rounded-2xl px-5 py-4 backdrop-blur-xl max-w-md">
-
-              <p className="text-orange-200 text-xs">
-                Sistem Aktif
-              </p>
-
-              <h2 className="text-white text-lg font-semibold mt-1">
-                MediaLend Campus System
-              </h2>
 
             </div>
 
@@ -368,7 +358,8 @@ if (res.data.user.nim) {
 
               <p className="text-xs text-white/40 mt-8 text-center">
 
-                © 2026 MediaLend System
+                © 2026 MediaLend Campus System
+                Institut Teknologi Bacharuddin Jusuf Habibie
 
               </p>
 
