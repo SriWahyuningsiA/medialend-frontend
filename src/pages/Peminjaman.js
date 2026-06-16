@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {
   useNavigate,
+  useLocation,
 } from "react-router-dom";
 
 import axios from "axios";
@@ -19,6 +20,7 @@ import {
 export default function Peminjaman() {
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const token = localStorage.getItem("token");
   const [nama, setNama] = useState(
@@ -246,7 +248,7 @@ export default function Peminjaman() {
 
           <SidebarItem
             icon={<FiClock />}
-            label="Riwayat"
+            label="Riwayat Peminjaman"
             onClick={() =>
               navigate("/riwayat")
             }

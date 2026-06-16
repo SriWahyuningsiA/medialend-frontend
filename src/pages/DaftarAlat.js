@@ -153,13 +153,7 @@ export default function DaftarAlat() {
         </div>
 
         {/* MENU */}
-        <div
-          className="flex-1 px-4 py-2 space-y-2 overflow-y-auto"
-          style={{
-            scrollbarWidth: "thin",
-            scrollbarColor: "rgba(251,146,60,0.35) transparent",
-          }}
-        >
+        <div className="flex-1 px-4 py-2 space-y-2">
 
           <SidebarItem
             icon={<FiHome />}
@@ -182,7 +176,7 @@ export default function DaftarAlat() {
 
           <SidebarItem
             icon={<FiClock />}
-            label="Riwayat"
+            label="Riwayat Peminjaman"
             onClick={() => navigate("/riwayat")}
           />
 

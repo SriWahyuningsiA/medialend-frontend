@@ -447,13 +447,17 @@ export default function DashboardAdmin() {
                         <span
                           className={`px-2 py-1 rounded text-[10px]
                           ${
-                            item.status === "dipinjam"
-                              ? "bg-orange-500"
-                              : "bg-green-500"
-                          }`}
-                        >
-                          {item.status}
-                        </span>
+                            item.status === "pending"
+                            ? "bg-yellow-500 text-black"
+                            : item.status === "dipinjam"
+                            ? "bg-orange-500 text-white"
+                            : item.status === "ditolak"
+                            ? "bg-red-500 text-white"
+                            : "bg-green-500 text-white"
+                        }`}
+                      >
+                        {item.status}
+                      </span>
 
                       </td>
 

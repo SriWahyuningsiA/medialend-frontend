@@ -431,7 +431,13 @@ export default function ManajemenAlat() {
         </form>
 
         {/* TABLE */}
-        <div className="flex-1 bg-white/20 backdrop-blur-xl border border-white/20 rounded-3xl p-5 overflow-auto">
+        <div
+          className="flex-1 bg-white/20 backdrop-blur-xl border border-white/20 rounded-3xl p-5 overflow-auto scrollbar-hide"
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+          }}
+        >
 
           <table className="w-full text-sm">
 

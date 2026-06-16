@@ -172,7 +172,7 @@ export default function Riwayat() {
 
           <SidebarItem
             icon={<FiClock />}
-            label="Riwayat"
+            label="Riwayat Peminjaman"
             active
             onClick={() => navigate("/riwayat")}
           />
@@ -286,9 +286,13 @@ export default function Riwayat() {
                       <span
                         className={`px-3 py-1 rounded-full text-xs
                         ${
-                          item.status === "dipinjam"
-                            ? "bg-orange-500"
-                            : "bg-green-500"
+                          item.status === "pending"
+                            ? "bg-yellow-500 text-black"
+                            : item.status === "dipinjam"
+                            ? "bg-orange-500 text-white"
+                            : item.status === "ditolak"
+                            ? "bg-red-500 text-white"
+                            : "bg-green-500 text-white"
                         }`}
                       >
                         {item.status}
