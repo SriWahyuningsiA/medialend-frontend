@@ -48,6 +48,30 @@ export default function RiwayatAdmin() {
 
   }, [navigate, token]);
 
+    useEffect(() => {
+
+    const sidebar =
+      document.getElementById(
+        "sidebar-menu"
+      );
+
+    const savedScroll =
+      sessionStorage.getItem(
+        "sidebarScroll"
+      );
+
+    if (
+      sidebar &&
+      savedScroll
+    ) {
+
+      sidebar.scrollTop =
+        parseInt(savedScroll);
+
+    }
+
+  }, []);
+
   /* ================= FETCH ================= */
 
   useEffect(() => {
@@ -154,11 +178,20 @@ export default function RiwayatAdmin() {
         {/* MENU */}
 
         <div
+          id="sidebar-menu"
           className="flex-1 overflow-y-auto px-4 py-2 space-y-2"
           style={{
             scrollbarWidth: "thin",
             scrollbarColor:
               "rgba(251,146,60,0.35) transparent",
+          }}
+          onScroll={(e) => {
+
+            sessionStorage.setItem(
+              "sidebarScroll",
+              e.target.scrollTop
+            );
+
           }}
         >
 
