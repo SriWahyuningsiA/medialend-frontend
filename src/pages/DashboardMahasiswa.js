@@ -140,7 +140,7 @@ export default function DashboardMahasiswa() {
     : 0;
 
   return (
-    <div className="flex h-screen overflow-y-auto">
+    <div className="lg:flex min-h-screen overflow-x-hidden">
 
       {/* BACKGROUND */}
 
@@ -257,7 +257,7 @@ export default function DashboardMahasiswa() {
 
       {/* ================= Mobile Navigation ================= */}
 
-      <div className="lg:hidden relative z-20 p-4">
+     <div className="lg:hidden relative z-20 p-4 w-full">
 
         {/* PROFILE */}
 
@@ -279,7 +279,8 @@ export default function DashboardMahasiswa() {
 
         {/* MENU */}
 
-        <div className="grid grid-cols-2 gap-3">
+       <div className="w-full overflow-x-auto pb-2">
+        <div className="flex gap-2 min-w-max">
 
           <SidebarItem
             icon={<FiHome />}
@@ -314,7 +315,27 @@ export default function DashboardMahasiswa() {
             }
           />
 
+          <button
+            onClick={handleLogout}
+            className="
+            bg-orange-500
+            hover:bg-orange-600
+            text-white
+            px-4
+            py-3
+            rounded-xl
+            flex
+            items-center
+            gap-2
+            whitespace-nowrap
+            "
+          >
+            <FiLogOut />
+            Logout
+          </button>
+
         </div>
+      </div> 
 
         {/* LOGOUT */}
 
@@ -347,7 +368,7 @@ export default function DashboardMahasiswa() {
 
       {/* ================= CONTENT ================= */}
 
-      <div className="relative flex-1 p-4 lg:p-6 flex flex-col gap-3 text-white overflow-y-auto">
+      <div className="relative w-full lg:flex-1 p-4 lg:p-6 flex flex-col gap-3 text-white overflow-y-auto overflow-x-hidden">
         {/* HEADER */}
 
         <div className="bg-white/20 backdrop-blur-xl border border-white/20 p-4 rounded-2xl flex flex-col md:flex-row md:justify-between md:items-center gap-2">
