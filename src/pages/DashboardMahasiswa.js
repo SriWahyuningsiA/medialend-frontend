@@ -140,7 +140,7 @@ export default function DashboardMahasiswa() {
     : 0;
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex flex-col lg:flex-row min-h-screen overflow-hidden">
 
       {/* BACKGROUND */}
 
@@ -157,7 +157,7 @@ export default function DashboardMahasiswa() {
 
       {/* ================= SIDEBAR ================= */}
 
-      <div className="relative w-72 flex flex-col backdrop-blur-xl bg-gradient-to-b from-orange-600/40 via-orange-500/30 to-orange-800/40 border-r border-orange-300/30 text-white">
+      <div className="relative w-full lg:w-72 flex flex-col backdrop-blur-xl bg-gradient-to-b from-orange-600/40 via-orange-500/30 to-orange-800/40 border-r border-orange-300/30 text-white">
 
         {/* LOGO */}
 
@@ -200,7 +200,7 @@ export default function DashboardMahasiswa() {
 
         {/* MENU */}
 
-        <div className="flex-1 px-4 py-2 space-y-2">
+        <div className="flex-1 px-4 py-2 flex lg:block gap-2 overflow-x-auto">
 
           <SidebarItem
             icon={<FiHome />}
@@ -258,11 +258,10 @@ export default function DashboardMahasiswa() {
 
       {/* ================= CONTENT ================= */}
 
-      <div className="relative flex-1 p-6 flex flex-col gap-3 text-white overflow-hidden">
-
+      <div className="relative flex-1 p-3 md:p-4 lg:p-6 flex flex-col gap-3 text-white overflow-hidden">
         {/* HEADER */}
 
-        <div className="bg-white/20 backdrop-blur-xl border border-white/20 p-5 rounded-2xl flex justify-between items-center">
+        <div className="bg-white/20 backdrop-blur-xl border border-white/20 p-4 rounded-2xl flex flex-col md:flex-row md:justify-between md:items-center gap-2">
 
           <div>
 
@@ -284,7 +283,7 @@ export default function DashboardMahasiswa() {
 
         {/* CARD */}
 
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
 
           <Card
             title="Total Alat"
@@ -343,7 +342,7 @@ export default function DashboardMahasiswa() {
 
         {/* BUTTON */}
 
-        <div className="flex gap-3">
+        <div className="flex flex-col sm:flex-row gap-3">
 
           <button
             onClick={() =>
@@ -367,7 +366,7 @@ export default function DashboardMahasiswa() {
 
         {/* RIWAYAT */}
 
-        <div className="flex-1 bg-white/20 backdrop-blur-xl border border-white/20 p-4 rounded-2xl flex flex-col overflow-hidden">
+        <div className="flex-1 bg-white/20 backdrop-blur-xl border border-white/20 p-3 md:p-4 rounded-2xl flex flex-col overflow-hidden">
 
           <div className="flex justify-between items-center mb-3">
 
@@ -409,7 +408,8 @@ export default function DashboardMahasiswa() {
 
             ) : (
 
-              <table className="w-full text-xs">
+              <div className="overflow-x-auto">
+                <table className="w-full text-xs min-w-[500px]">
 
                 <thead className="text-white/60 border-b border-white/10">
 
@@ -466,6 +466,7 @@ export default function DashboardMahasiswa() {
                 </tbody>
 
               </table>
+              </div>
 
             )}
 
@@ -491,7 +492,7 @@ function SidebarItem({
   return (
     <div
       onClick={onClick}
-      className={`flex gap-3 p-3 rounded-xl cursor-pointer transition hover:bg-white/10 ${
+      className={`flex items-center gap-2 whitespace-nowrap p-3 rounded-xl cursor-pointer transition hover:bg-white/10 ${
         active
           ? "bg-orange-500 text-white shadow-lg"
           : ""
