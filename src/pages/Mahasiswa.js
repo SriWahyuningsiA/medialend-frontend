@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 
 import axios from "axios";
+import { API_URL } from "../config";
 import kampus from "../assets/kampus.jpeg";
 
 import {
@@ -80,7 +81,7 @@ export default function Mahasiswa() {
     try {
 
       const res = await axios.get(
-        "http://localhost:3000/api/mahasiswa",
+        `${API_URL}/api/mahasiswa`,
         {
           headers: {
             Authorization:

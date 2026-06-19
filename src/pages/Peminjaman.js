@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 
 import axios from "axios";
+import { API_URL } from "../config";
 import kampus from "../assets/kampus.jpeg";
 
 import {
@@ -70,7 +71,7 @@ export default function Peminjaman() {
   try {
 
     const res = await axios.get(
-      "http://localhost:3000/api/mahasiswa/profile",
+      `${API_URL}/api/mahasiswa/profile`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -92,7 +93,7 @@ export default function Peminjaman() {
     try {
 
       const res = await axios.get(
-        "http://localhost:3000/api/alat"
+        `${API_URL}/api/alat`,
       );
 
       const tersedia = res.data.filter(
@@ -129,7 +130,7 @@ export default function Peminjaman() {
     try {
 
       await axios.post(
-        "http://localhost:3000/api/peminjaman",
+        `${API_URL}/api/peminjaman`,
         {
           alat_id: alatId,
           tanggal_pinjam: tanggal,

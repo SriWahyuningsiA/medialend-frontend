@@ -4,6 +4,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../config";
 import kampus from "../assets/kampus.jpeg";
 
 
@@ -71,7 +72,7 @@ export default function ManajemenAlat() {
   const fetchAlat = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:3000/api/alat",
+        `${API_URL}/api/alat`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -96,7 +97,7 @@ export default function ManajemenAlat() {
       if (editId) {
 
         await axios.put(
-          `http://localhost:3000/api/alat/${editId}`,
+          `${API_URL}/api/alat ${editId}`,
           {
             nama_alat,
             kode_alat,
@@ -112,7 +113,7 @@ export default function ManajemenAlat() {
       } else {
 
         await axios.post(
-          "http://localhost:3000/api/alat",
+          `${API_URL}/api/alat`,
           {
             nama_alat,
             kode_alat,
@@ -160,7 +161,7 @@ export default function ManajemenAlat() {
     try {
 
       await axios.delete(
-        `http://localhost:3000/api/alat/${id}`,
+        `${API_URL}/api/alat ${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

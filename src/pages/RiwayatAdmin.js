@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 
 import axios from "axios";
+import { API_URL } from "../config";
 import kampus from "../assets/kampus.jpeg";
 
 
@@ -87,7 +88,7 @@ export default function RiwayatAdmin() {
     try {
 
       const res = await axios.get(
-        "http://localhost:3000/api/peminjaman",
+        `${API_URL}/api/peminjaman`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 
 import axios from "axios";
+import { API_URL } from "../config";
 import kampus from "../assets/kampus.jpeg";
 
 import {
@@ -69,7 +70,7 @@ export default function DashboardAdmin() {
 
       const resAlat =
         await axios.get(
-          "http://localhost:3000/api/alat",
+          `${API_URL}/api/alat`,
           {
             headers: {
               Authorization:
@@ -80,7 +81,7 @@ export default function DashboardAdmin() {
 
       const resRiwayat =
         await axios.get(
-          "http://localhost:3000/api/peminjaman",
+        `${API_URL}/api/peminjaman`,
           {
             headers: {
               Authorization:

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../config";
 import kampus from "../assets/kampus.jpeg";
 
 import {
@@ -54,7 +55,7 @@ export default function ProfileMahasiswa() {
     try {
 
       const res = await axios.get(
-        "http://localhost:3000/api/mahasiswa/profile",
+        `${API_URL}/api/mahasiswa/profile`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -82,7 +83,7 @@ export default function ProfileMahasiswa() {
     try {
 
       const res = await axios.put(
-        "http://localhost:3000/api/mahasiswa/profile",
+        `${API_URL}/api/mahasiswa/profile`,
         {
           nama,
           email,

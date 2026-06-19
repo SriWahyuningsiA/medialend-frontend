@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 
 import axios from "axios";
+import { API_URL } from "../config";
 import kampus from "../assets/kampus.jpeg";
 
 import {
@@ -65,7 +66,7 @@ export default function Pengembalian() {
   const fetchData = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:3000/api/peminjaman",
+        `${API_URL}/api/peminjaman`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -90,7 +91,7 @@ export default function Pengembalian() {
   const handleKembalikan = async (id) => {
     try {
       await axios.put(
-        `http://localhost:3000/api/peminjaman/kembali/${id}`,
+        `${API_URL}/api/peminjaman/kembali/${id}`,
         {},
         {
           headers: {

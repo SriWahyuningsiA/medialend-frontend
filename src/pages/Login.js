@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { API_URL } from "../config";
 import {
   useNavigate,
   useLocation,
@@ -77,8 +78,8 @@ export default function Login() {
 
       const url =
         mode === "mahasiswa"
-          ? "http://localhost:3000/api/login-mahasiswa"
-          : "http://localhost:3000/api/login-admin";
+          ? `${API_URL}/api/login-mahasiswa`
+          : `${API_URL}/api/login-admin`;
 
       const payload =
         mode === "mahasiswa"

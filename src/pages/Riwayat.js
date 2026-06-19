@@ -3,6 +3,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../config";
 import kampus from "../assets/kampus.jpeg";
 
 import {
@@ -51,7 +52,7 @@ export default function Riwayat() {
   try {
 
     const res = await axios.get(
-      "http://localhost:3000/api/mahasiswa/profile",
+      `${API_URL}/api/mahasiswa/profile`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -73,7 +74,7 @@ export default function Riwayat() {
     try {
 
       const res = await axios.get(
-        "http://localhost:3000/api/peminjaman/user",
+        `${API_URL}/api/peminjaman/user`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
