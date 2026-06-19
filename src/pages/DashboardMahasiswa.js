@@ -255,63 +255,96 @@ export default function DashboardMahasiswa() {
 
       </div>
 
-      {/* ================= Mobile Navigation  ================= */}
-      <div className="lg:hidden relative z-20 p-3 bg-white/10 backdrop-blur-xl border-b border-white/10">
+      {/* ================= Mobile Navigation ================= */}
 
-      <div className="mb-3 p-3 rounded-2xl bg-white/10 border border-white/10">
+      <div className="lg:hidden relative z-20 p-4">
 
-        <h1 className="text-xl font-bold text-white">
-          Media<span className="text-orange-400">Lend</span>
-        </h1>
+        {/* PROFILE */}
 
-        <p className="text-sm text-white/80 mt-1">
-          {nama}
-        </p>
+        <div className="mb-4 p-4 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/10">
 
-        <p className="text-xs text-orange-200">
-          Mahasiswa
-        </p>
+          <h1 className="text-2xl font-bold text-white">
+            Media<span className="text-orange-400">Lend</span>
+          </h1>
 
-      </div>
+          <p className="text-white font-medium mt-2">
+            {nama}
+          </p>
 
-      <div className="flex gap-2 overflow-x-auto">
+          <p className="text-orange-200 text-sm">
+            Mahasiswa
+          </p>
 
-        <SidebarItem
-          icon={<FiHome />}
-          label="Dashboard"
-          active
-          onClick={() => navigate("/dashboard-mahasiswa")}
-        />
+        </div>
 
-        <SidebarItem
-          icon={<FiBox />}
-          label="Daftar Alat"
-          onClick={() => navigate("/alat")}
-        />
+        {/* MENU */}
 
-        <SidebarItem
-          icon={<FiClipboard />}
-          label="Peminjaman"
-          onClick={() => navigate("/peminjaman")}
-        />
+        <div className="grid grid-cols-2 gap-3">
 
-        <SidebarItem
-          icon={<FiClock />}
-          label="Riwayat"
-          onClick={() => navigate("/riwayat")}
-        />
+          <SidebarItem
+            icon={<FiHome />}
+            label="Dashboard"
+            active
+            onClick={() =>
+              navigate("/dashboard-mahasiswa")
+            }
+          />
+
+          <SidebarItem
+            icon={<FiBox />}
+            label="Daftar Alat"
+            onClick={() =>
+              navigate("/alat")
+            }
+          />
+
+          <SidebarItem
+            icon={<FiClipboard />}
+            label="Peminjaman"
+            onClick={() =>
+              navigate("/peminjaman")
+            }
+          />
+
+          <SidebarItem
+            icon={<FiClock />}
+            label="Riwayat"
+            onClick={() =>
+              navigate("/riwayat")
+            }
+          />
+
+        </div>
+
+        {/* LOGOUT */}
 
         <button
           onClick={handleLogout}
-          className="bg-red-500 px-4 py-3 rounded-xl whitespace-nowrap flex items-center gap-2"
+          className="
+            w-full
+            mt-4
+            bg-orange-500
+            hover:bg-orange-600
+            text-white
+            font-semibold
+            py-3
+            rounded-xl
+            flex
+            items-center
+            justify-center
+            gap-2
+            transition
+          "
         >
+
           <FiLogOut />
+
           Logout
+
         </button>
 
       </div>
 
-    </div>
       {/* ================= CONTENT ================= */}
 
       <div className="relative flex-1 p-4 lg:p-6 flex flex-col gap-3 text-white overflow-y-auto">
@@ -552,8 +585,8 @@ export default function DashboardMahasiswa() {
             px-4 py-3
             rounded-xl
             cursor-pointer
-            whitespace-nowrap
             transition
+            text-sm
             ${
               active
                 ? "bg-orange-500 text-white shadow-lg"
