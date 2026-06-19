@@ -140,12 +140,12 @@ export default function DashboardMahasiswa() {
     : 0;
 
   return (
-    <div className="lg:flex min-h-screen overflow-x-hidden">
+    <div className="flex h-screen overflow-hidden">
 
       {/* BACKGROUND */}
 
       <div
-         className="fixed inset-0 bg-cover bg-center"
+        className="absolute inset-0 bg-[length:90%] bg-center bg-no-repeat"
         style={{
           backgroundImage: `url(${kampus})`,
         }}
@@ -153,28 +153,12 @@ export default function DashboardMahasiswa() {
 
       {/* OVERLAY */}
 
-      <div className="fixed inset-0 bg-gradient-to-br from-black/70 via-orange-700/40 to-black/80" />
+      <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-orange-700/40 to-black/80" />
 
       {/* ================= SIDEBAR ================= */}
 
-      <div className="hidden lg:flex relative p-4 w-80">
-        <div
-    className="
-      flex flex-col
-      w-full
-      h-full
-      rounded-[32px]
-      bg-gradient-to-b
-      from-orange-500/20
-      via-orange-600/15
-      to-orange-900/25
-      backdrop-blur-2xl
-      border
-      border-orange-200/20
-      shadow-[0_20px_60px_rgba(249,115,22,0.2)]
-      text-white
-    "
-  >
+      <div className="relative w-72 flex flex-col backdrop-blur-xl bg-gradient-to-b from-orange-600/40 via-orange-500/30 to-orange-800/40 border-r border-orange-300/30 text-white">
+
         {/* LOGO */}
 
         <div className="p-6 border-b border-orange-200/30">
@@ -195,21 +179,7 @@ export default function DashboardMahasiswa() {
           onClick={() =>
             navigate("/profile-mahasiswa")
           }
-          className="
-          m-5
-          p-5
-          rounded-3xl
-          bg-white/10
-          backdrop-blur-xl
-          border
-          border-white/10
-          flex
-          items-center
-          gap-4
-          cursor-pointer
-          hover:bg-white/20
-          transition
-          "
+          className="m-4 p-4 rounded-2xl bg-white/20 backdrop-blur-xl border border-white/20 flex items-center gap-3 cursor-pointer hover:bg-white/30 hover:scale-[1.02] transition"
         >
 
           <FiUser className="text-orange-200 text-lg" />
@@ -264,11 +234,6 @@ export default function DashboardMahasiswa() {
               navigate("/riwayat")
             }
           />
-          <SidebarItem
-            icon={<FiLogOut />}
-            label="Logout"
-            onClick={handleLogout}
-          />
 
         </div>
 
@@ -290,91 +255,14 @@ export default function DashboardMahasiswa() {
         </div>
 
       </div>
-    </div>
-      {/* ================= Mobile Navigation ================= */}
-
-     <div className="lg:hidden relative z-20 p-4 w-full">
-
-        {/* PROFILE */}
-
-        <div 
-        className="
-        mb-5
-        p-6
-        rounded-3xl
-        bg-gradient-to-r
-        from-white/15
-        to-white/5
-        backdrop-blur-2xl
-        border
-        border-white/10
-        shadow-xl
-        "
-        >
-
-          <h1 className="text-4xl font-extrabold text-white">
-            Media<span className="text-orange-400">Lend</span>
-          </h1>
-
-          <p className="text-white text-xl font-semibold mt-3">
-            {nama}
-          </p>
-
-          <p className="text-orange-200 text-sm">
-            Mahasiswa
-          </p>
-
-        </div>
-
-        {/* MENU */}
-
-       <div className="w-full overflow-x-auto pb-2">
-        <div className="flex gap-2 min-w-max">
-
-          <SidebarItem
-            icon={<FiHome />}
-            label="Dashboard"
-            active
-            onClick={() =>
-              navigate("/dashboard-mahasiswa")
-            }
-          />
-
-          <SidebarItem
-            icon={<FiBox />}
-            label="Daftar Alat"
-            onClick={() =>
-              navigate("/alat")
-            }
-          />
-
-          <SidebarItem
-            icon={<FiClipboard />}
-            label="Peminjaman"
-            onClick={() =>
-              navigate("/peminjaman")
-            }
-          />
-
-          <SidebarItem
-            icon={<FiClock />}
-            label="Riwayat"
-            onClick={() =>
-              navigate("/riwayat")
-            }
-          />
-
-        </div>
-      </div> 
-
-      </div>
 
       {/* ================= CONTENT ================= */}
 
-      <div className="relative w-full lg:flex-1 p-4 lg:p-6 flex flex-col gap-3 text-white overflow-y-auto overflow-x-hidden">
+      <div className="relative flex-1 p-6 flex flex-col gap-3 text-white overflow-hidden">
+
         {/* HEADER */}
 
-        <div className="bg-white/20 backdrop-blur-xl border border-white/20 p-4 rounded-2xl flex flex-col md:flex-row md:justify-between md:items-center gap-2">
+        <div className="bg-white/20 backdrop-blur-xl border border-white/20 p-5 rounded-2xl flex justify-between items-center">
 
           <div>
 
@@ -396,7 +284,7 @@ export default function DashboardMahasiswa() {
 
         {/* CARD */}
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-4 gap-3">
 
           <Card
             title="Total Alat"
@@ -455,7 +343,7 @@ export default function DashboardMahasiswa() {
 
         {/* BUTTON */}
 
-        <div className="flex flex-col sm:flex-row gap-3">
+        <div className="flex gap-3">
 
           <button
             onClick={() =>
@@ -479,7 +367,7 @@ export default function DashboardMahasiswa() {
 
         {/* RIWAYAT */}
 
-        <div className="flex-1 bg-white/20 backdrop-blur-xl border border-white/20 p-3 md:p-4 rounded-2xl flex flex-col overflow-hidden">
+        <div className="flex-1 bg-white/20 backdrop-blur-xl border border-white/20 p-4 rounded-2xl flex flex-col overflow-hidden">
 
           <div className="flex justify-between items-center mb-3">
 
@@ -521,8 +409,7 @@ export default function DashboardMahasiswa() {
 
             ) : (
 
-              <div className="overflow-x-auto">
-                <table className="min-w-[500px] w-full text-xs">
+              <table className="w-full text-xs">
 
                 <thead className="text-white/60 border-b border-white/10">
 
@@ -579,7 +466,6 @@ export default function DashboardMahasiswa() {
                 </tbody>
 
               </table>
-              </div>
 
             )}
 
@@ -595,7 +481,7 @@ export default function DashboardMahasiswa() {
 
 /* ================= SIDEBAR ================= */
 
-    function SidebarItem({
+function SidebarItem({
   icon,
   label,
   active,
@@ -605,22 +491,17 @@ export default function DashboardMahasiswa() {
   return (
     <div
       onClick={onClick}
-      className={`
-        flex items-center gap-3
-        px-5 py-4
-        rounded-2xl
-        cursor-pointer
-        transition-all
-        duration-300
-        ${
-          active
-            ? "bg-orange-500 text-white shadow-lg"
-            : "hover:bg-white/10 text-white/90"
-        }
-      `}
+      className={`flex gap-3 p-3 rounded-xl cursor-pointer transition hover:bg-white/10 ${
+        active
+          ? "bg-orange-500 text-white shadow-lg"
+          : ""
+      }`}
     >
+
       {icon}
-      <span>{label}</span>
+
+      {label}
+
     </div>
   );
 }
