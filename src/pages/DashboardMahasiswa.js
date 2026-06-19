@@ -158,7 +158,6 @@ export default function DashboardMahasiswa() {
       {/* ================= SIDEBAR ================= */}
 
       <div className="hidden lg:flex relative w-72 flex-col backdrop-blur-xl bg-gradient-to-b from-orange-600/40 via-orange-500/30 to-orange-800/40 border-r border-orange-300/30 text-white">
-
         {/* LOGO */}
 
         <div className="p-6 border-b border-orange-200/30">
@@ -257,31 +256,65 @@ export default function DashboardMahasiswa() {
       </div>
 
       {/* ================= Mobile Navigation  ================= */}
-      <div className="lg:hidden flex justify-around bg-white/10 backdrop-blur-xl rounded-2xl p-2 mb-3">
-      <button onClick={()=>navigate("/dashboard-mahasiswa")}>
-        <FiHome />
-      </button>
+      <div className="lg:hidden relative z-20 p-3 bg-white/10 backdrop-blur-xl border-b border-white/10">
 
-      <button onClick={()=>navigate("/alat")}>
-        <FiBox />
-      </button>
+      <div className="mb-3 p-3 rounded-2xl bg-white/10 border border-white/10">
 
-      <button onClick={()=>navigate("/peminjaman")}>
-        <FiClipboard />
-      </button>
+        <h1 className="text-xl font-bold text-white">
+          Media<span className="text-orange-400">Lend</span>
+        </h1>
 
-      <button onClick={()=>navigate("/riwayat")}>
-        <FiClock />
-      </button>
+        <p className="text-sm text-white/80 mt-1">
+          {nama}
+        </p>
 
-      <button onClick={handleLogout}>
-        <FiLogOut />
-      </button>
+        <p className="text-xs text-orange-200">
+          Mahasiswa
+        </p>
+
       </div>
 
+      <div className="flex gap-2 overflow-x-auto">
+
+        <SidebarItem
+          icon={<FiHome />}
+          label="Dashboard"
+          active
+          onClick={() => navigate("/dashboard-mahasiswa")}
+        />
+
+        <SidebarItem
+          icon={<FiBox />}
+          label="Daftar Alat"
+          onClick={() => navigate("/alat")}
+        />
+
+        <SidebarItem
+          icon={<FiClipboard />}
+          label="Peminjaman"
+          onClick={() => navigate("/peminjaman")}
+        />
+
+        <SidebarItem
+          icon={<FiClock />}
+          label="Riwayat"
+          onClick={() => navigate("/riwayat")}
+        />
+
+        <button
+          onClick={handleLogout}
+          className="bg-red-500 px-4 py-3 rounded-xl whitespace-nowrap flex items-center gap-2"
+        >
+          <FiLogOut />
+          Logout
+        </button>
+
+      </div>
+
+    </div>
       {/* ================= CONTENT ================= */}
 
-      <div className="relative flex-1 p-3 md:p-4 lg:p-6 flex flex-col gap-3 text-white overflow-hidden">
+      <div className="relative flex-1 p-4 lg:p-6 flex flex-col gap-3 text-white overflow-y-auto">
         {/* HEADER */}
 
         <div className="bg-white/20 backdrop-blur-xl border border-white/20 p-4 rounded-2xl flex flex-col md:flex-row md:justify-between md:items-center gap-2">
@@ -432,7 +465,7 @@ export default function DashboardMahasiswa() {
             ) : (
 
               <div className="overflow-x-auto">
-                <table className="min-w-[500px] w-full">
+                <table className="min-w-[500px] w-full text-xs">
 
                 <thead className="text-white/60 border-b border-white/10">
 
@@ -505,30 +538,34 @@ export default function DashboardMahasiswa() {
 
 /* ================= SIDEBAR ================= */
 
-function SidebarItem({
-  icon,
-  label,
-  active,
-  onClick,
-}) {
-
-  return (
-    <div
-      onClick={onClick}
-      className={`flex items-center gap-2 whitespace-nowrap p-3 rounded-xl cursor-pointer transition hover:bg-white/10 ${
-        active
-          ? "bg-orange-500 text-white shadow-lg"
-          : ""
-      }`}
-    >
-
-      {icon}
-
-      {label}
-
-    </div>
-  );
-}
+    function SidebarItem({
+      icon,
+      label,
+      active,
+      onClick,
+    }) {
+      return (
+        <div
+          onClick={onClick}
+          className={`
+            flex items-center gap-2
+            px-4 py-3
+            rounded-xl
+            cursor-pointer
+            whitespace-nowrap
+            transition
+            ${
+              active
+                ? "bg-orange-500 text-white shadow-lg"
+                : "bg-white/10 text-white hover:bg-white/20"
+            }
+          `}
+        >
+          {icon}
+          <span>{label}</span>
+        </div>
+      );
+    }
 
 /* ================= CARD ================= */
 
