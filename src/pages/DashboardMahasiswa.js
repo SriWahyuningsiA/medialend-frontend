@@ -145,7 +145,7 @@ export default function DashboardMahasiswa() {
       {/* BACKGROUND */}
 
       <div
-        className="absolute inset-0 bg-[length:90%] bg-center bg-no-repeat"
+         className="fixed inset-0 bg-cover bg-center"
         style={{
           backgroundImage: `url(${kampus})`,
         }}
@@ -153,7 +153,7 @@ export default function DashboardMahasiswa() {
 
       {/* OVERLAY */}
 
-      <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-orange-700/40 to-black/80" />
+      <div className="fixed inset-0 bg-gradient-to-br from-black/70 via-orange-700/40 to-black/80" />
 
       {/* ================= SIDEBAR ================= */}
 
@@ -261,13 +261,13 @@ export default function DashboardMahasiswa() {
 
         {/* PROFILE */}
 
-        <div className="mb-4 p-4 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/10">
+        <div className="mb-5 p-5 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/10 shadow-xl">
 
-          <h1 className="text-2xl font-bold text-white">
+          <h1 className="text-4xl font-extrabold text-white">
             Media<span className="text-orange-400">Lend</span>
           </h1>
 
-          <p className="text-white font-medium mt-2">
+          <p className="text-white text-xl font-semibold mt-3">
             {nama}
           </p>
 
@@ -314,25 +314,6 @@ export default function DashboardMahasiswa() {
               navigate("/riwayat")
             }
           />
-
-          <button
-            onClick={handleLogout}
-            className="
-            bg-orange-500
-            hover:bg-orange-600
-            text-white
-            px-4
-            py-3
-            rounded-xl
-            flex
-            items-center
-            gap-2
-            whitespace-nowrap
-            "
-          >
-            <FiLogOut />
-            Logout
-          </button>
 
         </div>
       </div> 
@@ -602,12 +583,13 @@ export default function DashboardMahasiswa() {
         <div
           onClick={onClick}
           className={`
-            flex items-center gap-2
-            px-4 py-3
-            rounded-xl
+            flex items-center gap-3
+            px-6 py-4
+            rounded-2xl
             cursor-pointer
             transition
-            text-sm
+            text-base
+            whitespace-nowrap
             ${
               active
                 ? "bg-orange-500 text-white shadow-lg"
