@@ -140,7 +140,7 @@ export default function DashboardMahasiswa() {
     : 0;
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen overflow-hidden">
+    <div className="flex h-screen overflow-y-auto">
 
       {/* BACKGROUND */}
 
@@ -157,7 +157,7 @@ export default function DashboardMahasiswa() {
 
       {/* ================= SIDEBAR ================= */}
 
-      <div className="relative w-full lg:w-72 flex flex-col backdrop-blur-xl bg-gradient-to-b from-orange-600/40 via-orange-500/30 to-orange-800/40 border-r border-orange-300/30 text-white">
+      <div className="hidden lg:flex relative w-72 flex-col backdrop-blur-xl bg-gradient-to-b from-orange-600/40 via-orange-500/30 to-orange-800/40 border-r border-orange-300/30 text-white">
 
         {/* LOGO */}
 
@@ -200,7 +200,7 @@ export default function DashboardMahasiswa() {
 
         {/* MENU */}
 
-        <div className="flex-1 px-4 py-2 flex lg:block gap-2 overflow-x-auto">
+        <div className="flex-1 px-4 py-2 space-y-2">
 
           <SidebarItem
             icon={<FiHome />}
@@ -256,6 +256,29 @@ export default function DashboardMahasiswa() {
 
       </div>
 
+      {/* ================= Mobile Navigation  ================= */}
+      <div className="lg:hidden flex justify-around bg-white/10 backdrop-blur-xl rounded-2xl p-2 mb-3">
+      <button onClick={()=>navigate("/dashboard-mahasiswa")}>
+        <FiHome />
+      </button>
+
+      <button onClick={()=>navigate("/alat")}>
+        <FiBox />
+      </button>
+
+      <button onClick={()=>navigate("/peminjaman")}>
+        <FiClipboard />
+      </button>
+
+      <button onClick={()=>navigate("/riwayat")}>
+        <FiClock />
+      </button>
+
+      <button onClick={handleLogout}>
+        <FiLogOut />
+      </button>
+      </div>
+
       {/* ================= CONTENT ================= */}
 
       <div className="relative flex-1 p-3 md:p-4 lg:p-6 flex flex-col gap-3 text-white overflow-hidden">
@@ -283,7 +306,7 @@ export default function DashboardMahasiswa() {
 
         {/* CARD */}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
 
           <Card
             title="Total Alat"
@@ -409,7 +432,7 @@ export default function DashboardMahasiswa() {
             ) : (
 
               <div className="overflow-x-auto">
-                <table className="w-full text-xs min-w-[500px]">
+                <table className="min-w-[500px] w-full">
 
                 <thead className="text-white/60 border-b border-white/10">
 
