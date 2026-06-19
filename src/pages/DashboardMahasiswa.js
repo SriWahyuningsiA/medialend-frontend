@@ -157,7 +157,24 @@ export default function DashboardMahasiswa() {
 
       {/* ================= SIDEBAR ================= */}
 
-      <div className="hidden lg:flex relative w-72 flex-col backdrop-blur-xl bg-gradient-to-b from-orange-600/40 via-orange-500/30 to-orange-800/40 border-r border-orange-300/30 text-white">
+      <div className="hidden lg:flex relative p-4 w-80">
+        <div
+    className="
+      flex flex-col
+      w-full
+      h-full
+      rounded-[32px]
+      bg-gradient-to-b
+      from-orange-500/20
+      via-orange-600/15
+      to-orange-900/25
+      backdrop-blur-2xl
+      border
+      border-orange-200/20
+      shadow-[0_20px_60px_rgba(249,115,22,0.2)]
+      text-white
+    "
+  >
         {/* LOGO */}
 
         <div className="p-6 border-b border-orange-200/30">
@@ -178,7 +195,21 @@ export default function DashboardMahasiswa() {
           onClick={() =>
             navigate("/profile-mahasiswa")
           }
-          className="m-4 p-4 rounded-2xl bg-white/20 backdrop-blur-xl border border-white/20 flex items-center gap-3 cursor-pointer hover:bg-white/30 hover:scale-[1.02] transition"
+          className="
+          m-5
+          p-5
+          rounded-3xl
+          bg-white/10
+          backdrop-blur-xl
+          border
+          border-white/10
+          flex
+          items-center
+          gap-4
+          cursor-pointer
+          hover:bg-white/20
+          transition
+          "
         >
 
           <FiUser className="text-orange-200 text-lg" />
@@ -233,6 +264,11 @@ export default function DashboardMahasiswa() {
               navigate("/riwayat")
             }
           />
+          <SidebarItem
+            icon={<FiLogOut />}
+            label="Logout"
+            onClick={handleLogout}
+          />
 
         </div>
 
@@ -254,14 +290,27 @@ export default function DashboardMahasiswa() {
         </div>
 
       </div>
-
+    </div>
       {/* ================= Mobile Navigation ================= */}
 
      <div className="lg:hidden relative z-20 p-4 w-full">
 
         {/* PROFILE */}
 
-        <div className="mb-5 p-5 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/10 shadow-xl">
+        <div 
+        className="
+        mb-5
+        p-6
+        rounded-3xl
+        bg-gradient-to-r
+        from-white/15
+        to-white/5
+        backdrop-blur-2xl
+        border
+        border-white/10
+        shadow-xl
+        "
+        >
 
           <h1 className="text-4xl font-extrabold text-white">
             Media<span className="text-orange-400">Lend</span>
@@ -317,33 +366,6 @@ export default function DashboardMahasiswa() {
 
         </div>
       </div> 
-
-        {/* LOGOUT */}
-
-        <button
-          onClick={handleLogout}
-          className="
-            w-full
-            mt-4
-            bg-orange-500
-            hover:bg-orange-600
-            text-white
-            font-semibold
-            py-3
-            rounded-xl
-            flex
-            items-center
-            justify-center
-            gap-2
-            transition
-          "
-        >
-
-          <FiLogOut />
-
-          Logout
-
-        </button>
 
       </div>
 
@@ -574,34 +596,34 @@ export default function DashboardMahasiswa() {
 /* ================= SIDEBAR ================= */
 
     function SidebarItem({
-      icon,
-      label,
-      active,
-      onClick,
-    }) {
-      return (
-        <div
-          onClick={onClick}
-          className={`
-            flex items-center gap-3
-            px-6 py-4
-            rounded-2xl
-            cursor-pointer
-            transition
-            text-base
-            whitespace-nowrap
-            ${
-              active
-                ? "bg-orange-500 text-white shadow-lg"
-                : "bg-white/10 text-white hover:bg-white/20"
-            }
-          `}
-        >
-          {icon}
-          <span>{label}</span>
-        </div>
-      );
-    }
+  icon,
+  label,
+  active,
+  onClick,
+}) {
+
+  return (
+    <div
+      onClick={onClick}
+      className={`
+        flex items-center gap-3
+        px-5 py-4
+        rounded-2xl
+        cursor-pointer
+        transition-all
+        duration-300
+        ${
+          active
+            ? "bg-orange-500 text-white shadow-lg"
+            : "hover:bg-white/10 text-white/90"
+        }
+      `}
+    >
+      {icon}
+      <span>{label}</span>
+    </div>
+  );
+}
 
 /* ================= CARD ================= */
 
