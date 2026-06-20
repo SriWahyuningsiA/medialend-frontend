@@ -317,18 +317,25 @@ export default function DaftarAlat() {
 
           <div className="p-2 pt-0">
 
-            <div className="w-full overflow-x-auto overflow-y-hidden">
-
-              <div
-                id="mobile-menu-scroll"
-                className="w-full overflow-x-auto overflow-y-hidden"
-                onScroll={(e) => {
-                  sessionStorage.setItem(
-                    "mobileMenuScroll",
-                    e.target.scrollLeft
-                  );
-                }}
-              >
+            <div
+              id="mobile-menu-scroll"
+              className="
+                w-full
+                overflow-x-auto
+                overflow-y-hidden
+                [&::-webkit-scrollbar]:hidden
+              "
+              style={{
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
+              }}
+              onScroll={(e) => {
+                sessionStorage.setItem(
+                  "mobileMenuScroll",
+                  e.target.scrollLeft
+                );
+              }}
+            >
 
               <div className="flex gap-3 min-w-max pb-2">
 
@@ -390,7 +397,7 @@ export default function DaftarAlat() {
         </div>
 
       </div>
-      </div>
+
       {/* ================= CONTENT DESKTOP ================= */}
       <div
         className="
