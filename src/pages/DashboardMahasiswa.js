@@ -54,7 +54,7 @@ export default function DashboardMahasiswa() {
   };
 
   /* ================= FETCH DATA ================= */
-
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
 
     if (!token) return;
@@ -140,12 +140,21 @@ export default function DashboardMahasiswa() {
     : 0;
 
   return (
-    <div className="flex h-screen overflow-hidden">
+   <div
+    className="
+      relative
+      flex
+      flex-col
+      lg:flex-row
+      min-h-screen
+      overflow-x-hidden
+    "
+  >
 
       {/* BACKGROUND */}
 
       <div
-        className="absolute inset-0 bg-[length:90%] bg-center bg-no-repeat"
+          className="fixed inset-0 bg-[length:90%] bg-center bg-no-repeat"
         style={{
           backgroundImage: `url(${kampus})`,
         }}
@@ -157,7 +166,7 @@ export default function DashboardMahasiswa() {
 
       {/* ================= SIDEBAR ================= */}
 
-      <div className="relative w-72 flex flex-col backdrop-blur-xl bg-gradient-to-b from-orange-600/40 via-orange-500/30 to-orange-800/40 border-r border-orange-300/30 text-white">
+      <div className="hidden lg:flex relative w-72 flex flex-col backdrop-blur-xl bg-gradient-to-b from-orange-600/40 via-orange-500/30 to-orange-800/40 border-r border-orange-300/30 text-white">
 
         {/* LOGO */}
 
@@ -256,17 +265,177 @@ export default function DashboardMahasiswa() {
 
       </div>
 
-      {/* ================= CONTENT ================= */}
+      {/* MOBILE ONLY */}
 
-      <div className="relative flex-1 p-6 flex flex-col gap-3 text-white overflow-hidden">
+      <div className="lg:hidden relative z-20 p-4 w-full">
+
+        {/* CARD BESAR */}
+
+        <div className="
+          w-full
+          rounded-3xl
+          bg-gradient-to-br
+          from-orange-700/40
+          via-orange-600/20
+          to-orange-900/40
+          backdrop-blur-xl
+          border
+          border-orange-300/20
+          shadow-2xl
+        ">
+
+          {/* LOGO */}
+
+          <div className="p-2 border-b border-orange-300/10">
+
+            <h1 className="text-2xl font-bold text-white">
+              Media
+              <span className="text-orange-400">
+                Lend
+              </span>
+            </h1>
+
+            <p className="text-white/70">
+              Sistem Peminjaman Kampus
+            </p>
+
+          </div>
+
+          {/* PROFILE */}
+
+          <div className="p-1">
+
+            <div className="
+              p-2
+              rounded-lg
+              bg-orange-500/15
+              border
+              border-orange-300/20
+              flex
+              items-center
+              gap-3
+            ">
+
+              <FiUser className="text-xl text-orange-200" />
+
+              <div>
+
+                <p className="font-semibold text-white">
+                  {nama}
+                </p>
+
+                <p className="text-orange-200 text-sm">
+                  Mahasiswa
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          {/* MENU */}
+
+          <div className="p-2 pt-0">
+
+              <div
+                className="
+                  w-full
+                  overflow-x-auto
+                  overflow-y-hidden
+                "
+              >
+
+              <div
+              className="
+                flex
+                gap-3
+                min-w-max
+                pb-2
+              "
+            >
+              <div className="flex-shrink-0">
+                <MobileMenuItem
+                  icon={<FiHome />}
+                  label="Dashboard"
+                  active
+                  onClick={() =>
+                    navigate("/dashboard-mahasiswa")
+                  }
+                />
+              </div>
+              
+              <div className="flex-shrink-0">
+                <MobileMenuItem
+                  icon={<FiBox />}
+                  label="Daftar Alat"
+                  onClick={() =>
+                    navigate("/alat")
+                  }
+                />
+              </div>
+
+              <div className="flex-shrink-0">
+                <MobileMenuItem
+                  icon={<FiClipboard />}
+                  label="Peminjaman"
+                  onClick={() =>
+                    navigate("/peminjaman")
+                  }
+                />
+              </div>
+
+              <div className="flex-shrink-0">
+                <MobileMenuItem
+                  icon={<FiClock />}
+                  label="Riwayat"
+                  onClick={() =>
+                    navigate("/riwayat")
+                  }
+                />
+              </div>
+
+
+              <div className="flex-shrink-0">
+                <MobileMenuItem
+                  icon={<FiLogOut />}
+                  label="Logout"
+                  onClick={handleLogout}
+                />
+              </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      {/* ================= CONTENT DESKTOP ================= */}
+
+      <div className="
+      relative
+      flex-1
+      p-4
+      lg:p-6
+      flex
+      flex-col
+      gap-3
+      text-white
+      overflow-visible
+      lg:overflow-y-auto
+    ">
 
         {/* HEADER */}
 
-        <div className="bg-white/20 backdrop-blur-xl border border-white/20 p-5 rounded-2xl flex justify-between items-center">
+        <div className="bg-white/20 backdrop-blur-xl border border-white/20 p-3 lg:p-5 rounded-2xl flex justify-between items-center">
 
           <div>
 
-            <h1 className="text-lg font-semibold">
+            <h1 className="text-sm lg:text-lg font-semibold">
               Selamat datang, {nama}
             </h1>
 
@@ -276,15 +445,15 @@ export default function DashboardMahasiswa() {
 
           </div>
 
-          <span className="text-xs text-green-400">
-            ● Sistem Aktif
+          <span className="text-[10px] text-green-400 whitespace-nowrap">
+            ● Online
           </span>
 
         </div>
 
         {/* CARD */}
 
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
 
           <Card
             title="Total Alat"
@@ -349,7 +518,7 @@ export default function DashboardMahasiswa() {
             onClick={() =>
               navigate("/alat")
             }
-            className="bg-orange-500 px-4 py-2 rounded-xl text-sm hover:scale-105 transition"
+            className="bg-orange-500 px-3 py-2 rounded-xl text-sm hover:scale-105 transition"
           >
             Lihat Daftar Alat
           </button>
@@ -358,7 +527,7 @@ export default function DashboardMahasiswa() {
             onClick={() =>
               navigate("/peminjaman")
             }
-            className="bg-white/20 border border-white/20 px-4 py-2 rounded-xl text-sm hover:bg-white/30 transition"
+            className="bg-white/20 border border-white/20 px-3 lg:px-4 py-2 rounded-xl text-sm hover:bg-white/30 transition"
           >
             Ajukan Peminjaman
           </button>
@@ -506,7 +675,40 @@ function SidebarItem({
   );
 }
 
-/* ================= CARD ================= */
+/* ================= SIDEBAR MOBILE ================= */
+
+  function MobileMenuItem({
+    icon,
+    label,
+    active,
+    onClick,
+  }) {
+    return (
+      <div
+        onClick={onClick}
+        className={`
+          flex items-center gap-2
+          px-4 py-2
+          rounded-xl
+          whitespace-nowrap
+          cursor-pointer
+          transition
+          ${
+            active
+              ? "bg-orange-500 text-white shadow-md"
+              : "bg-white/10 text-white hover:bg-white/20"
+          }
+        `}
+      >
+        {icon}
+        <span className="text-sm">
+          {label}
+        </span>
+      </div>
+    );
+  }
+
+/* ================= CARD DESKTOP ================= */
 
 function Card({
   title,
@@ -524,7 +726,7 @@ function Card({
 
       </div>
 
-      <p className="text-xl font-bold mt-1">
+      <p className="text-lg lg:text-xl font-bold mt-1">
         {value}
       </p>
 
