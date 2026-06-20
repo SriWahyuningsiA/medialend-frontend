@@ -135,6 +135,7 @@ useEffect(() => {
           bg-center
           bg-no-repeat
           bg-cover
+          min-h-screen
           lg:bg-[length:90%]
         "
         style={{
@@ -143,7 +144,7 @@ useEffect(() => {
       />
 
       {/* OVERLAY */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-orange-700/40 to-black/80" />
+      <div className="fixed inset-0 bg-gradient-to-br from-black/70 via-orange-700/40 to-black/80" />
 
       {/* ================= SIDEBAR ================= */}
       <div className="hidden lg:flex relative w-72 flex flex-col backdrop-blur-xl bg-gradient-to-b from-orange-600/40 via-orange-500/30 to-orange-800/40 border-r border-orange-300/30 text-white">
@@ -534,7 +535,7 @@ useEffect(() => {
         "
       >
 
-        <div className="bg-white/20 backdrop-blur-xl border border-white/20 rounded-3xl p-4">
+        <div className="bg-white/20 backdrop-blur-xl border border-white/20 rounded-3xl p-4 min-h-[65vh]">
 
           <h1 className="text-lg font-bold">
             Riwayat Peminjaman
@@ -565,8 +566,7 @@ useEffect(() => {
               <div
                 className="
                   space-y-3
-                  max-h-[500px]
-                  overflow-y-auto
+                  min-h-[300px]
                 "
               >
 

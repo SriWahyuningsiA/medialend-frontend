@@ -189,6 +189,7 @@ export default function Peminjaman() {
           bg-center
           bg-no-repeat
           bg-cover
+          min-h-screen
           lg:bg-[length:90%]
         "
         style={{
@@ -198,7 +199,7 @@ export default function Peminjaman() {
 
       {/* OVERLAY */}
 
-      <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-orange-700/40 to-black/80" />
+      <div className="fixed inset-0 bg-gradient-to-br from-black/70 via-orange-700/40 to-black/80" />
 
       {/* SIDEBAR */}
 
