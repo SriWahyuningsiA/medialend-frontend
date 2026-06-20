@@ -313,7 +313,12 @@ export default function DashboardMahasiswa() {
 
           <div className="p-1">
 
-            <div className="
+            <div 
+              onClick={() =>
+                navigate("/profile-mahasiswa")
+              }
+
+            className="
               p-2
               rounded-lg
               bg-orange-500/15
@@ -322,6 +327,9 @@ export default function DashboardMahasiswa() {
               flex
               items-center
               gap-3
+              cursor-pointer
+              hover:bg-orange-500/20
+              transition
             ">
 
               <FiUser className="text-xl text-orange-200" />

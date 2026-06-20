@@ -132,7 +132,12 @@ export default function Riwayat() {
         </div>
 
         {/* PROFILE */}
-        <div className="m-4 p-4 rounded-2xl bg-white/20 backdrop-blur-xl border border-white/20 flex items-center gap-3">
+        <div
+          onClick={() =>
+            navigate("/profile-mahasiswa")
+          }
+          className="m-4 p-4 rounded-2xl bg-white/20 backdrop-blur-xl border border-white/20 flex items-center gap-3 cursor-pointer hover:bg-white/30 hover:scale-[1.02] transition"
+        >
 
           <FiUser className="text-orange-200 text-lg" />
 
