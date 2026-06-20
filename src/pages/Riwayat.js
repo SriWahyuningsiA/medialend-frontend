@@ -38,6 +38,29 @@ export default function Riwayat() {
 
   }, [navigate, token]);
 
+  /* ================= MOBILE MENU SCROLL ================= */
+
+useEffect(() => {
+
+  const menu =
+    document.getElementById(
+      "mobile-menu-scroll"
+    );
+
+  const saved =
+    sessionStorage.getItem(
+      "mobileMenuScroll"
+    );
+
+  if (menu && saved) {
+
+    menu.scrollLeft =
+      parseInt(saved);
+
+  }
+
+}, []);
+
   /* ================= FETCH ================= */
  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
@@ -106,7 +129,14 @@ export default function Riwayat() {
 
       {/* BACKGROUND */}
       <div
-        className="absolute inset-0 bg-[length:90%] bg-center bg-no-repeat"
+        className="
+          fixed
+          inset-0
+          bg-center
+          bg-no-repeat
+          bg-cover
+          lg:bg-[length:90%]
+        "
         style={{
           backgroundImage: `url(${kampus})`,
         }}
@@ -116,7 +146,7 @@ export default function Riwayat() {
       <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-orange-700/40 to-black/80" />
 
       {/* ================= SIDEBAR ================= */}
-      <div className="relative w-72 flex flex-col backdrop-blur-xl bg-gradient-to-b from-orange-600/40 via-orange-500/30 to-orange-800/40 border-r border-orange-300/30 text-white">
+      <div className="hidden lg:flex relative w-72 flex flex-col backdrop-blur-xl bg-gradient-to-b from-orange-600/40 via-orange-500/30 to-orange-800/40 border-r border-orange-300/30 text-white">
 
         {/* LOGO */}
         <div className="p-6 border-b border-orange-200/20">
@@ -140,7 +170,6 @@ export default function Riwayat() {
         >
 
           <FiUser className="text-orange-200 text-lg" />
-
           <div>
 
             <p className="text-sm font-semibold">
@@ -203,8 +232,170 @@ export default function Riwayat() {
 
       </div>
 
-      {/* ================= CONTENT ================= */}
-      <div className="relative flex-1 p-6 text-white flex flex-col overflow-hidden">
+      {/* MOBILE ONLY */}
+
+      <div className="lg:hidden relative z-20 p-4 w-full">
+
+        <div
+          className="
+            w-full
+            rounded-3xl
+            bg-gradient-to-br
+            from-orange-700/40
+            via-orange-600/20
+            to-orange-900/40
+            backdrop-blur-xl
+            border
+            border-orange-300/20
+            shadow-2xl
+          "
+        >
+
+          {/* LOGO */}
+
+          <div className="p-2 border-b border-orange-300/10">
+
+            <h1 className="text-2xl font-bold text-white">
+              Media
+              <span className="text-orange-400">
+                Lend
+              </span>
+            </h1>
+
+            <p className="text-white/70">
+              Sistem Peminjaman Kampus
+            </p>
+
+          </div>
+
+          {/* PROFILE */}
+
+          <div className="p-1">
+
+            <div
+              onClick={() =>
+                navigate("/profile-mahasiswa")
+              }
+              className="
+                p-2
+                rounded-lg
+                bg-orange-500/15
+                border
+                border-orange-300/20
+                flex
+                items-center
+                gap-3
+                cursor-pointer
+              "
+            >
+
+              <FiUser className="text-xl text-orange-200" />
+
+              <div>
+
+                <p className="font-semibold text-white">
+                  {nama}
+                </p>
+
+                <p className="text-orange-200 text-sm">
+                  Mahasiswa
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          {/* MENU */}
+
+          <div className="p-2 pt-0">
+
+            <div
+              id="mobile-menu-scroll"
+              className="
+                w-full
+                overflow-x-auto
+                overflow-y-hidden
+                [&::-webkit-scrollbar]:hidden
+              "
+              style={{
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
+              }}
+              onScroll={(e) => {
+
+                sessionStorage.setItem(
+                  "mobileMenuScroll",
+                  e.target.scrollLeft
+                );
+
+              }}
+            >
+
+              <div className="flex gap-3 min-w-max pb-2">
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiHome />}
+                    label="Dashboard"
+                    onClick={() =>
+                      navigate("/dashboard-mahasiswa")
+                    }
+                  />
+                </div>
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiBox />}
+                    label="Daftar Alat"
+                    onClick={() =>
+                      navigate("/alat")
+                    }
+                  />
+                </div>
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiClipboard />}
+                    label="Peminjaman"
+                    onClick={() =>
+                      navigate("/peminjaman")
+                    }
+                  />
+                </div>
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiClock />}
+                    label="Riwayat"
+                    active
+                    onClick={() =>
+                      navigate("/riwayat")
+                    }
+                  />
+                </div>
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiLogOut />}
+                    label="Logout"
+                    onClick={handleLogout}
+                  />
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      {/* ================= CONTENT DESKTOP ================= */}
+      <div className="hidden lg:flex relative flex-1 p-6 text-white flex-col overflow-hidden">
 
         {/* HEADER */}
         <div className="bg-white/20 backdrop-blur-xl border border-white/20 p-5 rounded-2xl mb-4 flex justify-between items-center">
@@ -222,7 +413,7 @@ export default function Riwayat() {
           </div>
 
           <span className="text-xs text-green-400">
-            ● Sistem Aktif
+            ● Online
           </span>
 
         </div>
@@ -325,6 +516,108 @@ export default function Riwayat() {
           )}
 
         </div>
+      </div>
+
+      {/* CONTENT MOBILE */}
+
+      <div
+        className="
+          lg:hidden
+          absolute
+          top-[260px]
+          left-0
+          w-full
+          px-4
+          pb-6
+          z-20
+          text-white
+        "
+      >
+
+        <div className="bg-white/20 backdrop-blur-xl border border-white/20 rounded-3xl p-4">
+
+          <h1 className="text-lg font-bold">
+            Riwayat Peminjaman
+          </h1>
+
+          <p className="text-xs text-white/60 mb-4">
+            Semua data peminjaman alat multimedia
+          </p>
+
+          {riwayat.length === 0 ? (
+
+            <div className="text-center py-8">
+
+              <FiCheckCircle className="text-5xl mx-auto mb-3 text-orange-300" />
+
+              <p className="font-semibold">
+                Belum Ada Riwayat
+              </p>
+
+              <p className="text-xs text-white/50 mt-2">
+                Silakan lakukan peminjaman alat terlebih dahulu
+              </p>
+
+            </div>
+
+          ) : (
+
+              <div
+                className="
+                  space-y-3
+                  max-h-[500px]
+                  overflow-y-auto
+                "
+              >
+
+              {riwayat.map((item, i) => (
+
+                <div
+                  key={i}
+                  className="
+                  bg-white/10
+                  border
+                  border-white/10
+                  rounded-2xl
+                  p-3
+                  shadow-lg
+                "
+              >
+
+                  <p className="font-semibold">
+                    {item.Alat?.nama_alat || "-"}
+                  </p>
+
+                  <p className="text-xs text-white/60 mt-1">
+                    {new Date(
+                      item.createdAt
+                    ).toLocaleDateString("id-ID")}
+                  </p>
+
+                  <span
+                    className={`inline-block mt-2 px-3 py-1 rounded-full text-xs
+                    ${
+                      item.status === "pending"
+                      ? "bg-yellow-500 text-black"
+                      : item.status === "dipinjam"
+                      ? "bg-orange-500 text-white"
+                      : item.status === "ditolak"
+                      ? "bg-red-500 text-white"
+                      : "bg-green-500 text-white"
+                    }`}
+                  >
+                    {item.status}
+                  </span>
+
+                </div>
+
+              ))}
+
+            </div>
+
+          )}
+
+        </div>
 
       </div>
     </div>
@@ -352,6 +645,40 @@ function SidebarItem({
     >
       {icon}
       {label}
+    </div>
+  );
+}
+
+/* ================= SIDEBAR MOBILE ================= */
+
+function MobileMenuItem({
+  icon,
+  label,
+  active,
+  onClick,
+}) {
+  return (
+    <div
+      onClick={onClick}
+      className={`
+        flex items-center gap-2
+        px-4 py-2
+        rounded-xl
+        whitespace-nowrap
+        cursor-pointer
+        transition
+        ${
+          active
+            ? "bg-orange-500 text-white shadow-md"
+            : "bg-white/10 text-white hover:bg-white/20"
+        }
+      `}
+    >
+      {icon}
+
+      <span className="text-sm">
+        {label}
+      </span>
     </div>
   );
 }
