@@ -147,6 +147,7 @@ export default function DashboardMahasiswa() {
       flex-col
       lg:flex-row
       min-h-screen
+      w-full
       overflow-x-hidden
     "
   >
@@ -154,7 +155,14 @@ export default function DashboardMahasiswa() {
       {/* BACKGROUND */}
 
       <div
-          className="fixed inset-0 bg-[length:90%] bg-center bg-no-repeat"
+        className="
+          fixed
+          inset-0
+          bg-center
+          bg-no-repeat
+          bg-cover
+          lg:bg-[length:90%]
+        "
         style={{
           backgroundImage: `url(${kampus})`,
         }}
