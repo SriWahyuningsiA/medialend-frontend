@@ -56,6 +56,22 @@ export default function Peminjaman() {
 
   }, [navigate, token]);
 
+  /* ================= tambahan ================= */
+  useEffect(() => {
+  const menu = document.getElementById(
+    "mobile-menu-scroll"
+  );
+
+  const savedScroll =
+    sessionStorage.getItem(
+      "mobileMenuScroll"
+    );
+
+  if (menu && savedScroll) {
+    menu.scrollLeft = parseInt(savedScroll);
+  }
+}, []);
+
   /* ================= FETCH ALAT ================= */
 
   useEffect(() => {
@@ -167,7 +183,14 @@ export default function Peminjaman() {
       {/* BACKGROUND */}
 
       <div
-        className="absolute inset-0 bg-[length:90%] bg-center bg-no-repeat"
+        className="
+          fixed
+          inset-0
+          bg-center
+          bg-no-repeat
+          bg-cover
+          lg:bg-[length:90%]
+        "
         style={{
           backgroundImage: `url(${kampus})`,
         }}
@@ -179,7 +202,7 @@ export default function Peminjaman() {
 
       {/* SIDEBAR */}
 
-      <div className="relative w-72 flex flex-col backdrop-blur-xl bg-gradient-to-b from-orange-600/40 via-orange-500/30 to-orange-800/40 border-r border-orange-300/30 text-white">
+      <div className="hidden lg:flex relative w-72 flex-col backdrop-blur-xl bg-gradient-to-b from-orange-600/40 via-orange-500/30 to-orange-800/40 border-r border-orange-300/30 text-white">
 
         {/* LOGO */}
 
@@ -281,9 +304,296 @@ export default function Peminjaman() {
 
       </div>
 
-      {/* CONTENT */}
 
-      <div className="relative flex-1 p-6 flex items-center justify-center text-white">
+      {/* MOBILE ONLY */}
+
+      <div className="lg:hidden relative z-20 px-4 pt-4 pb-6 w-full">
+        <div
+          className="
+            w-full
+            rounded-3xl
+            bg-gradient-to-br
+            from-orange-700/40
+            via-orange-600/20
+            to-orange-900/40
+            backdrop-blur-xl
+            border
+            border-orange-300/20
+            shadow-2xl
+          "
+        >
+
+          {/* LOGO */}
+
+          <div className="p-2 border-b border-orange-300/10">
+
+            <h1 className="text-2xl font-bold text-white">
+              Media
+              <span className="text-orange-400">
+                Lend
+              </span>
+            </h1>
+
+            <p className="text-white/70">
+              Sistem Peminjaman Kampus
+            </p>
+
+          </div>
+
+          {/* PROFILE */}
+
+          <div className="p-1">
+
+            <div
+              onClick={() =>
+                navigate("/profile-mahasiswa")
+              }
+              className="
+                p-2
+                rounded-lg
+                bg-orange-500/15
+                border
+                border-orange-300/20
+                flex
+                items-center
+                gap-3
+                cursor-pointer
+              "
+            >
+
+              <FiUser className="text-xl text-orange-200" />
+
+              <div>
+
+                <p className="font-semibold text-white">
+                  {nama}
+                </p>
+
+                <p className="text-orange-200 text-sm">
+                  Mahasiswa
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          {/* MENU */}
+
+          <div className="p-2 pt-0">
+
+           <div
+              id="mobile-menu-scroll"
+              className="w-full overflow-x-auto overflow-y-hidden [&::-webkit-scrollbar]:hidden"
+              style={{
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
+              }}
+              onScroll={(e) => {
+                sessionStorage.setItem(
+                  "mobileMenuScroll",
+                  e.target.scrollLeft
+                );
+              }}
+            >
+
+              <div className="flex gap-3 min-w-max pb-2">
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiHome />}
+                    label="Dashboard"
+                    onClick={() =>
+                      navigate("/dashboard-mahasiswa")
+                    }
+                  />
+                </div>
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiBox />}
+                    label="Daftar Alat"
+                    onClick={() =>
+                      navigate("/alat")
+                    }
+                  />
+                </div>
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiClipboard />}
+                    label="Peminjaman"
+                    active
+                    onClick={() =>
+                      navigate("/peminjaman")
+                    }
+                  />
+                </div>
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiClock />}
+                    label="Riwayat"
+                    onClick={() =>
+                      navigate("/riwayat")
+                    }
+                  />
+                </div>
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiLogOut />}
+                    label="Logout"
+                    onClick={handleLogout}
+                  />
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      {/* FORM MOBILE */}
+
+      <div
+        className="
+          lg:hidden
+          absolute
+          top-[260px]
+          left-0
+          w-full
+          px-4
+          pb-6
+          z-20
+        "
+      >
+
+        <form
+          onSubmit={handleSubmit}
+          className="
+            w-full
+            bg-white/20
+            backdrop-blur-xl
+            border
+            border-white/20
+            rounded-3xl
+            p-5
+            text-white
+          "
+        >
+          <h1 className="text-xl font-bold mb-2">
+            Ajukan Peminjaman
+          </h1>
+
+          <p className="text-xs text-white/60 mb-5">
+            Silakan isi form peminjaman alat multimedia
+          </p>
+
+          {/* PILIH ALAT */}
+
+          <div className="mb-4">
+
+            <label className="text-sm text-white/70 block mb-2">
+              Pilih Alat
+            </label>
+
+            <select
+              value={alatId}
+              onChange={(e) =>
+                setAlatId(e.target.value)
+              }
+              required
+              className="w-full bg-white/10 border border-white/20 rounded-xl p-3 outline-none"
+            >
+
+              <option value="">
+                -- Pilih Alat --
+              </option>
+
+              {alat.map((item) => (
+
+                <option
+                  key={item.id}
+                  value={item.id}
+                  className="text-black"
+                >
+
+                  {item.nama_alat}
+
+                </option>
+
+              ))}
+
+            </select>
+
+          </div>
+
+          {/* TANGGAL */}
+
+          <div className="mb-4">
+
+            <label className="text-sm text-white/70 block mb-2">
+              Tanggal Pinjam
+            </label>
+
+            <input
+              type="date"
+              value={tanggal}
+              onChange={(e) =>
+                setTanggal(e.target.value)
+              }
+              required
+              className="w-full bg-white/10 border border-white/20 rounded-xl p-3 outline-none"
+            />
+
+          </div>
+
+          {/* CATATAN */}
+
+          <div className="mb-6">
+
+            <label className="text-sm text-white/70 block mb-2">
+              Keperluan
+            </label>
+
+            <textarea
+              rows="3"
+              value={catatan}
+              onChange={(e) =>
+                setCatatan(e.target.value)
+              }
+              placeholder="Contoh : Presentasi seminar..."
+              className="w-full bg-white/10 border border-white/20 rounded-xl p-3 outline-none resize-none"
+            />
+
+          </div>
+
+          {/* BUTTON */}
+
+          <button
+            type="submit"
+            className="w-full bg-orange-500 hover:bg-orange-600 transition py-3 rounded-xl font-semibold flex items-center justify-center gap-2"
+          >
+
+            <FiSend />
+
+            Ajukan Sekarang
+
+          </button>
+
+        </form>
+
+      </div>
+
+      {/* CONTENT DESKTOP */}
+
+      <div className="hidden lg:flex relative flex-1 p-6 items-center justify-center text-white">
 
         <form
           onSubmit={handleSubmit}
@@ -395,9 +705,9 @@ export default function Peminjaman() {
 
       </div>
 
-    </div>
-  );
-}
+          </div>
+        );
+      }
 
 /* ================= SIDEBAR ================= */
 
@@ -422,6 +732,39 @@ function SidebarItem({
 
       {label}
 
+    </div>
+  );
+}
+
+/* ================= SIDEBAR MOBILE MENU ITEM ================= */
+function MobileMenuItem({
+  icon,
+  label,
+  active,
+  onClick,
+}) {
+  return (
+    <div
+      onClick={onClick}
+      className={`
+        flex items-center gap-2
+        px-4 py-2
+        rounded-xl
+        whitespace-nowrap
+        cursor-pointer
+        transition
+        ${
+          active
+            ? "bg-orange-500 text-white shadow-md"
+            : "bg-white/10 text-white hover:bg-white/20"
+        }
+      `}
+    >
+      {icon}
+
+      <span className="text-sm">
+        {label}
+      </span>
     </div>
   );
 }

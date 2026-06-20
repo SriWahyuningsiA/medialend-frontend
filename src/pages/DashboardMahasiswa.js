@@ -43,6 +43,25 @@ export default function DashboardMahasiswa() {
 
   }, [navigate, token]);
 
+  /* ================= TAMBAHAN  ================= */
+
+  useEffect(() => {
+
+  const menu = document.getElementById(
+    "mobile-menu-scroll"
+  );
+
+  const savedScroll =
+    sessionStorage.getItem(
+      "mobileMenuScroll"
+    );
+
+  if (menu && savedScroll) {
+    menu.scrollLeft = parseInt(savedScroll);
+  }
+
+}, []);
+
   /* ================= LOGOUT ================= */
 
   const handleLogout = () => {
@@ -355,11 +374,23 @@ export default function DashboardMahasiswa() {
           <div className="p-2 pt-0">
 
               <div
+                id="mobile-menu-scroll"
                 className="
                   w-full
                   overflow-x-auto
                   overflow-y-hidden
+                  [&::-webkit-scrollbar]:hidden
                 "
+                style={{
+                  scrollbarWidth: "none",
+                  msOverflowStyle: "none",
+                }}
+                onScroll={(e) => {
+                  sessionStorage.setItem(
+                    "mobileMenuScroll",
+                    e.target.scrollLeft
+                  );
+                }}
               >
 
               <div

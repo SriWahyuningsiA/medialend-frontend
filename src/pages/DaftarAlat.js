@@ -39,6 +39,25 @@ export default function DaftarAlat() {
     }
   }, [navigate, token]);
 
+
+/* ================= Tambahan ================= */
+  useEffect(() => {
+  const menu =
+    document.getElementById(
+      "mobile-menu-scroll"
+    );
+
+  const saved =
+    sessionStorage.getItem(
+      "mobileMenuScroll"
+    );
+
+  if (menu && saved) {
+    menu.scrollLeft =
+      parseInt(saved);
+  }
+}, []);
+
   /* ================= FETCH DATA ================= */
   useEffect(() => {
     fetchProfile();
@@ -300,6 +319,17 @@ export default function DaftarAlat() {
 
             <div className="w-full overflow-x-auto overflow-y-hidden">
 
+              <div
+                id="mobile-menu-scroll"
+                className="w-full overflow-x-auto overflow-y-hidden"
+                onScroll={(e) => {
+                  sessionStorage.setItem(
+                    "mobileMenuScroll",
+                    e.target.scrollLeft
+                  );
+                }}
+              >
+
               <div className="flex gap-3 min-w-max pb-2">
 
                 <div className="flex-shrink-0">
@@ -360,7 +390,7 @@ export default function DaftarAlat() {
         </div>
 
       </div>
-
+      </div>
       {/* ================= CONTENT DESKTOP ================= */}
       <div
         className="
