@@ -190,7 +190,6 @@ export default function Peminjaman() {
           bg-no-repeat
           bg-cover
           min-h-screen
-          lg:bg-[length:90%]
         "
         style={{
           backgroundImage: `url(${kampus})`,

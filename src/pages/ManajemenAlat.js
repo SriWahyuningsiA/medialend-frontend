@@ -47,7 +47,7 @@ export default function ManajemenAlat() {
     }
   }, [navigate, token]);
 
-
+  
   useEffect(() => {
   const sidebar =
     document.getElementById("sidebar-menu");
@@ -60,6 +60,29 @@ export default function ManajemenAlat() {
       parseInt(savedScroll);
   }
   }, []);
+
+  /* ================= MOBILE MENU SCROLL ================= */
+
+useEffect(() => {
+
+  const menu =
+    document.getElementById(
+      "mobile-menu-scroll"
+    );
+
+  const saved =
+    sessionStorage.getItem(
+      "mobileMenuScroll"
+    );
+
+  if (menu && saved) {
+
+    menu.scrollLeft =
+      parseInt(saved);
+
+  }
+
+}, []);
 
   /* ================= FETCH ================= */
 
@@ -97,7 +120,7 @@ export default function ManajemenAlat() {
       if (editId) {
 
         await axios.put(
-          `${API_URL}/api/alat ${editId}`,
+          `${API_URL}/api/alat/${editId}`,
           {
             nama_alat,
             kode_alat,
@@ -161,7 +184,7 @@ export default function ManajemenAlat() {
     try {
 
       await axios.delete(
-        `${API_URL}/api/alat ${id}`,
+        `${API_URL}/api/alat/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -184,11 +207,26 @@ export default function ManajemenAlat() {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden">
-
+    <div
+      className="
+        flex
+        flex-col
+        lg:flex-row
+        min-h-screen
+        lg:h-screen
+        overflow-x-hidden
+        lg:overflow-hidden
+      "
+    >
       {/* BACKGROUND */}
       <div
-        className="absolute inset-0 bg-[length:90%] bg-center bg-no-repeat"
+        className="
+          fixed
+          inset-0
+          bg-center
+          bg-no-repeat
+          bg-cover
+        "
         style={{
           backgroundImage: `url(${kampus})`,
         }}
@@ -198,7 +236,7 @@ export default function ManajemenAlat() {
       <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-orange-700/40 to-black/80" />
 
       {/* SIDEBAR */}
-      <div className="relative w-72 flex flex-col backdrop-blur-xl bg-gradient-to-b from-orange-600/40 via-orange-500/30 to-orange-800/40 border-r border-orange-300/30 text-white">
+      <div className="hidden lg:flex relative w-72 flex-col backdrop-blur-xl bg-gradient-to-b from-orange-600/40 via-orange-500/30 to-orange-800/40 border-r border-orange-300/30 text-white">
 
         {/* LOGO */}
         <div className="p-6 border-b border-orange-200/30">
@@ -340,8 +378,186 @@ export default function ManajemenAlat() {
 
       </div>
 
-      {/* CONTENT */}
-      <div className="relative flex-1 p-6 text-white flex flex-col gap-4 overflow-hidden">
+      {/* MOBILE ONLY */}
+
+      <div className="lg:hidden relative z-20 p-4 w-full">
+
+        <div
+          className="
+            w-full
+            rounded-3xl
+            bg-gradient-to-br
+            from-orange-700/40
+            via-orange-600/20
+            to-orange-900/40
+            backdrop-blur-xl
+            border
+            border-orange-300/20
+            shadow-2xl
+          "
+        >
+
+          {/* LOGO */}
+
+          <div className="p-2 border-b border-orange-300/10">
+
+            <h1 className="text-2xl font-bold text-white">
+              Media
+              <span className="text-orange-400">
+                Lend
+              </span>
+            </h1>
+
+            <p className="text-white/70">
+              Dashboard Admin
+            </p>
+
+          </div>
+
+          {/* PROFILE */}
+
+          <div className="p-1">
+
+            <div
+              className="
+                p-2
+                rounded-lg
+                bg-orange-500/15
+                border
+                border-orange-300/20
+                flex
+                items-center
+                gap-3
+              "
+            >
+
+              <FiUser className="text-xl text-orange-200" />
+
+              <div>
+
+                <p className="font-semibold text-white">
+                  {admin || "Administrator"}
+                </p>
+
+                <p className="text-orange-200 text-sm">
+                  Administrator
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          {/* MENU */}
+
+          <div className="p-2 pt-0">
+
+            <div
+              id="mobile-menu-scroll"
+              className="
+                w-full
+                overflow-x-auto
+                overflow-y-hidden
+                [&::-webkit-scrollbar]:hidden
+              "
+              style={{
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
+              }}
+              onScroll={(e) => {
+
+                sessionStorage.setItem(
+                  "mobileMenuScroll",
+                  e.target.scrollLeft
+                );
+
+              }}
+            >
+
+              <div className="flex gap-3 min-w-max pb-2">
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiHome />}
+                    label="Dashboard"
+                    onClick={() =>
+                      navigate("/dashboard-admin")
+                    }
+                  />
+                </div>
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiBox />}
+                    label="Alat"
+                    active
+                    onClick={() =>
+                      navigate("/manajemen-alat")
+                    }
+                  />
+                </div>
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiClipboard />}
+                    label="Pengajuan"
+                    onClick={() =>
+                      navigate("/pengajuan")
+                    }
+                  />
+                </div>
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiRotateCcw />}
+                    label="Kembali"
+                    onClick={() =>
+                      navigate("/pengembalian")
+                    }
+                  />
+                </div>
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiClock />}
+                    label="Riwayat"
+                    onClick={() =>
+                      navigate("/riwayat-admin")
+                    }
+                  />
+                </div>
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiUsers />}
+                    label="Mahasiswa"
+                    onClick={() =>
+                      navigate("/mahasiswa")
+                    }
+                  />
+                </div>
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiLogOut />}
+                    label="Logout"
+                    onClick={handleLogout}
+                  />
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      {/* CONTENT DESKTOP*/}
+      <div className="hidden lg:flex relative flex-1 p-6 text-white flex-col gap-4 overflow-hidden">
 
         {/* HEADER */}
         <div className="bg-white/20 backdrop-blur-xl border border-white/20 p-5 rounded-2xl flex justify-between items-center">
@@ -359,7 +575,7 @@ export default function ManajemenAlat() {
           </div>
 
           <span className="text-xs text-green-400">
-            ● Admin Aktif
+            ● Online
           </span>
 
         </div>
@@ -544,8 +760,256 @@ export default function ManajemenAlat() {
           </table>
 
         </div>
+        </div>
 
-      </div>
+      {/* ================= CONTENT MOBILE ================= */}
+
+        <div className="lg:hidden relative z-20 px-4 pb-6 text-white">
+
+          {/* HEADER */}
+
+          <div className="bg-white/20 backdrop-blur-xl border border-white/20 p-4 rounded-2xl mb-3">
+
+            <h1 className="text-lg font-bold">
+              Manajemen Alat
+            </h1>
+
+            <p className="text-xs text-white/70">
+              Kelola alat multimedia kampus
+            </p>
+
+          </div>
+
+          {/* FORM */}
+
+          <form
+            onSubmit={handleSubmit}
+            className="
+              bg-white/20
+              backdrop-blur-xl
+              border
+              border-white/20
+              rounded-2xl
+              p-4
+              space-y-3
+              mb-3
+            "
+          >
+
+            <input
+              type="text"
+              placeholder="Nama Alat"
+              value={nama_alat}
+              onChange={(e) =>
+                setNamaAlat(e.target.value)
+              }
+              className="
+                w-full
+                bg-white/10
+                border
+                border-white/20
+                rounded-xl
+                px-4
+                py-3
+                text-white
+                placeholder:text-white/40
+              "
+              required
+            />
+
+            <input
+              type="text"
+              placeholder="Kode Alat"
+              value={kode_alat}
+              onChange={(e) =>
+                setKodeAlat(e.target.value)
+              }
+              className="
+                w-full
+                bg-white/10
+                border
+                border-white/20
+                rounded-xl
+                px-4
+                py-3
+                text-white
+                placeholder:text-white/40
+              "
+              required
+            />
+
+            <select
+              value={status}
+              onChange={(e) =>
+                setStatus(e.target.value)
+              }
+              className="
+                w-full
+                bg-white/10
+                border
+                border-white/20
+                rounded-xl
+                px-4
+                py-3
+                text-white
+              "
+            >
+              <option
+                value="tersedia"
+                className="text-black"
+              >
+                Tersedia
+              </option>
+
+              <option
+                value="dipinjam"
+                className="text-black"
+              >
+                Dipinjam
+              </option>
+
+            </select>
+
+            <button
+              type="submit"
+              className="
+                w-full
+                bg-orange-500
+                py-3
+                rounded-xl
+                flex
+                items-center
+                justify-center
+                gap-2
+                font-semibold
+              "
+            >
+
+              <FiPlus />
+
+              {editId
+                ? "Update Alat"
+                : "Tambah Alat"}
+
+            </button>
+
+          </form>
+
+          {/* DATA ALAT */}
+
+          <div className="space-y-3">
+
+            {alat.length === 0 ? (
+
+              <div className="
+                bg-white/20
+                backdrop-blur-xl
+                border
+                border-white/20
+                rounded-2xl
+                p-6
+                text-center
+              ">
+
+                Belum ada data alat
+
+              </div>
+
+            ) : (
+
+              alat.map((item) => (
+
+                <div
+                  key={item.id}
+                  className="
+                    bg-white/20
+                    backdrop-blur-xl
+                    border
+                    border-white/20
+                    rounded-2xl
+                    p-4
+                  "
+                >
+
+                  <div className="flex justify-between items-start">
+
+                    <div>
+
+                      <h3 className="font-semibold">
+                        {item.nama_alat}
+                      </h3>
+
+                      <p className="text-xs text-white/60 mt-1">
+                        {item.kode_alat}
+                      </p>
+
+                    </div>
+
+                    <span
+                      className={`px-3 py-1 rounded-full text-xs ${
+                        item.status === "tersedia"
+                          ? "bg-green-500"
+                          : "bg-orange-500"
+                      }`}
+                    >
+                      {item.status}
+                    </span>
+
+                  </div>
+
+                  <div className="flex gap-2 mt-4">
+
+                    <button
+                      type="button"
+                      onClick={() =>
+                        handleEdit(item)
+                      }
+                      className="
+                        flex-1
+                        bg-blue-500
+                        py-2
+                        rounded-xl
+                        flex
+                        justify-center
+                        items-center
+                      "
+                    >
+
+                      <FiEdit />
+
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() =>
+                        handleDelete(item.id)
+                      }
+                      className="
+                        flex-1
+                        bg-red-500
+                        py-2
+                        rounded-xl
+                        flex
+                        justify-center
+                        items-center
+                      "
+                    >
+
+                      <FiTrash2 />
+
+                    </button>
+
+                  </div>
+
+                </div>
+
+              ))
+
+            )}
+
+          </div>
+
+        </div>
 
     </div>
   );
@@ -573,3 +1037,36 @@ function SidebarItem({
     </div>
   );
 }
+
+/* ================= SIDEBAR MOBILE ================= */
+
+  function MobileMenuItem({
+    icon,
+    label,
+    active,
+    onClick,
+  }) {
+    return (
+      <div
+        onClick={onClick}
+        className={`
+          flex items-center gap-2
+          px-4 py-2
+          rounded-xl
+          whitespace-nowrap
+          cursor-pointer
+          transition
+          ${
+            active
+              ? "bg-orange-500 text-white shadow-md"
+              : "bg-white/10 text-white hover:bg-white/20"
+          }
+        `}
+      >
+        {icon}
+        <span className="text-sm">
+          {label}
+        </span>
+      </div>
+    );
+  }

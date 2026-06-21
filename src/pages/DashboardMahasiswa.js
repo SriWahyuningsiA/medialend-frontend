@@ -180,7 +180,6 @@ export default function DashboardMahasiswa() {
           bg-center
           bg-no-repeat
           bg-cover
-          lg:bg-[length:90%]
         "
         style={{
           backgroundImage: `url(${kampus})`,

@@ -128,16 +128,16 @@ export default function DaftarAlat() {
 
   return (
     <div
-      className="
-        relative
-        flex
-        flex-col
-        lg:flex-row
-        min-h-screen
-        w-full
-        overflow-x-hidden
-      "
-    >
+          className="
+            flex
+            flex-col
+            lg:flex-row
+            min-h-screen
+            lg:h-screen
+            overflow-x-hidden
+            lg:overflow-hidden
+          "
+        >
 
       {/* BACKGROUND */}
       <div
@@ -147,7 +147,6 @@ export default function DaftarAlat() {
           bg-center
           bg-no-repeat
           bg-cover
-          lg:bg-[length:90%]
         "
         style={{
           backgroundImage: `url(${kampus})`,
@@ -155,7 +154,7 @@ export default function DaftarAlat() {
       />
 
       {/* OVERLAY */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-orange-700/40 to-black/80" />
+       <div className="fixed inset-0 bg-gradient-to-br from-black/70 via-orange-700/40 to-black/80" />
 
       {/* ================= SIDEBAR ================= */}
       <div className="hidden lg:flex relative w-72 flex flex-col backdrop-blur-xl bg-gradient-to-b from-orange-600/40 via-orange-500/30 to-orange-800/40 border-r border-orange-300/30 text-white">

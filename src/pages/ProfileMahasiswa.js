@@ -12,6 +12,7 @@ import {
   FiLogOut,
   FiUser,
   FiSave,
+  FiArrowLeft,
 } from "react-icons/fi";
 
 export default function ProfileMahasiswa() {
@@ -39,6 +40,27 @@ export default function ProfileMahasiswa() {
     }
 
   }, [token]);
+
+  useEffect(() => {
+
+  const menu =
+    document.getElementById(
+      "mobile-menu-scroll"
+    );
+
+  const saved =
+    sessionStorage.getItem(
+      "mobileMenuScroll"
+    );
+
+  if(menu && saved){
+
+    menu.scrollLeft =
+      parseInt(saved);
+
+  }
+
+}, []);
 
   /* ================= FETCH PROFILE ================= */
 
@@ -127,12 +149,17 @@ export default function ProfileMahasiswa() {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden">
-
+    <div className="lg:flex min-h-screen overflow-x-hidden">
       {/* BACKGROUND */}
 
       <div
-        className="absolute inset-0 bg-[length:90%] bg-center bg-no-repeat"
+        className="
+          fixed
+          inset-0
+          bg-cover
+          bg-center
+          bg-no-repeat
+        "
         style={{
           backgroundImage: `url(${kampus})`,
         }}
@@ -140,11 +167,11 @@ export default function ProfileMahasiswa() {
 
       {/* OVERLAY */}
 
-      <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-orange-700/40 to-black/80" />
+      <div className="fixed inset-0 bg-gradient-to-br from-black/70 via-orange-700/40 to-black/80" />
 
       {/* SIDEBAR */}
 
-      <div className="relative w-72 flex flex-col backdrop-blur-xl bg-gradient-to-b from-orange-600/40 via-orange-500/30 to-orange-800/40 border-r border-orange-300/30 text-white">
+      <div className="hidden lg:flex relative w-72 flex-col backdrop-blur-xl bg-gradient-to-b from-orange-600/40 via-orange-500/30 to-orange-800/40 border-r border-orange-300/30 text-white">
 
         {/* LOGO */}
 
@@ -251,10 +278,179 @@ export default function ProfileMahasiswa() {
         </div>
 
       </div>
+      
+      {/* CONTENT MOBILE */}
 
-      {/* CONTENT */}
+      <div
+        className="
+          lg:hidden
+          relative
+          z-20
+          px-4
+          pt-4
+          pb-10
+          text-white
+          overflow-y-auto
+        "
+        style={{
+          maxHeight: "100vh",
+        }}
+      >
 
-      <div className="relative flex-1 p-6 flex items-center justify-center text-white">
+        <form
+          onSubmit={handleUpdate}
+          className="
+            w-full
+            bg-white/20
+            backdrop-blur-xl
+            border
+            border-white/20
+            rounded-3xl
+            p-5
+          "
+        >
+
+          <button
+            type="button"
+            onClick={() => navigate(-1)}
+            className="
+              w-11
+              h-11
+              mb-4
+              rounded-xl
+              bg-white/10
+              backdrop-blur-md
+              border
+              border-white/20
+              flex
+              items-center
+              justify-center
+              text-white
+              hover:bg-white/20
+              transition
+            "
+          >
+            <FiArrowLeft size={20} />
+          </button>
+
+          <h1 className="text-xl font-bold mb-2">
+            Profile Mahasiswa
+          </h1>
+
+          <p className="text-sm text-white/60 mb-6">
+            Kelola data profile akun mahasiswa
+          </p>
+
+          {/* NAMA */}
+
+          <div className="mb-4">
+
+            <label className="block text-sm text-white/70 mb-2">
+              Nama Lengkap
+            </label>
+
+            <input
+              type="text"
+              value={nama}
+              onChange={(e) =>
+                setNama(e.target.value)
+              }
+              className="
+                w-full
+                bg-white/10
+                border
+                border-white/20
+                rounded-xl
+                p-3
+                outline-none
+              "
+            />
+
+          </div>
+
+          {/* NIM */}
+
+          <div className="mb-4">
+
+            <label className="block text-sm text-white/70 mb-2">
+              NIM
+            </label>
+
+            <input
+              type="text"
+              value={nim}
+              disabled
+              className="
+                w-full
+                bg-white/5
+                border
+                border-white/10
+                rounded-xl
+                p-3
+                text-white/60
+              "
+            />
+
+          </div>
+
+          {/* EMAIL */}
+
+          <div className="mb-6">
+
+            <label className="block text-sm text-white/70 mb-2">
+              Email
+            </label>
+
+            <input
+              type="email"
+              value={email}
+              onChange={(e) =>
+                setEmail(e.target.value)
+              }
+              className="
+                w-full
+                bg-white/10
+                border
+                border-white/20
+                rounded-xl
+                p-3
+                outline-none
+              "
+            />
+
+          </div>
+
+          {/* BUTTON */}
+
+          <button
+            type="submit"
+            className="
+              w-full
+              bg-orange-500
+              hover:bg-orange-600
+              py-3
+              rounded-xl
+              font-semibold
+              flex
+              items-center
+              justify-center
+              gap-2
+            "
+          >
+
+            <FiSave />
+
+            Simpan Profile
+
+          </button>
+
+        </form>
+
+      </div>
+
+      {/* CONTENT DESKTOP */}
+
+      <div className="hidden lg:flex relative flex-1 p-6 flex items-center justify-center text-white">
 
         <form
           onSubmit={handleUpdate}
@@ -369,6 +565,40 @@ function SidebarItem({
 
       {label}
 
+    </div>
+  );
+}
+
+/* ================= SIDEBAR ================= */
+
+function MobileMenuItem({
+  icon,
+  label,
+  active,
+  onClick,
+}) {
+  return (
+    <div
+      onClick={onClick}
+      className={`
+        flex items-center gap-2
+        px-4 py-2
+        rounded-xl
+        whitespace-nowrap
+        cursor-pointer
+        transition
+        ${
+          active
+            ? "bg-orange-500 text-white shadow-md"
+            : "bg-white/10 text-white hover:bg-white/20"
+        }
+      `}
+    >
+      {icon}
+
+      <span className="text-sm">
+        {label}
+      </span>
     </div>
   );
 }

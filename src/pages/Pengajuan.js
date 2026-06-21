@@ -54,6 +54,28 @@ export default function Pengajuan() {
   }
   }, []);
 
+
+    useEffect(() => {
+
+      const menu =
+        document.getElementById(
+          "mobile-menu-scroll"
+        );
+
+      const saved =
+        sessionStorage.getItem(
+          "mobileMenuScroll"
+        );
+
+      if (menu && saved) {
+
+        menu.scrollLeft =
+          parseInt(saved);
+
+      }
+
+    }, []);
+
   /* ================= FETCH ================= */
 
   useEffect(() => {
@@ -137,21 +159,37 @@ export default function Pengajuan() {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div
+      className="
+        relative
+        flex
+        flex-col
+        lg:flex-row
+        min-h-screen
+        w-full
+        overflow-x-hidden
+      "
+    >
 
       {/* BACKGROUND */}
       <div
-        className="absolute inset-0 bg-[length:90%] bg-center bg-no-repeat"
+        className="
+          fixed
+          inset-0
+          bg-center
+          bg-no-repeat
+          bg-cover
+        "
         style={{
           backgroundImage: `url(${kampus})`,
         }}
       />
 
       {/* OVERLAY */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-orange-700/40 to-black/80" />
+      <div className="fixed inset-0 bg-gradient-to-br from-black/70 via-orange-700/40 to-black/80" />
 
       {/* SIDEBAR */}
-      <div className="relative w-72 h-screen flex flex-col backdrop-blur-xl bg-gradient-to-b from-orange-600/40 via-orange-500/30 to-orange-800/40 border-r border-orange-300/30 text-white">
+      <div className="hidden lg:flex relative w-72 h-screen flex-col backdrop-blur-xl bg-gradient-to-b from-orange-600/40 via-orange-500/30 to-orange-800/40 border-r border-orange-300/30 text-white">
 
         {/* LOGO */}
         <div className="p-6 border-b border-orange-200/20">
@@ -285,8 +323,186 @@ export default function Pengajuan() {
         </div>
       </div>
 
+      {/* MOBILE ONLY */}
+
+      <div className="lg:hidden relative z-20 p-4 w-full">
+
+        <div
+          className="
+            w-full
+            rounded-3xl
+            bg-gradient-to-br
+            from-orange-700/40
+            via-orange-600/20
+            to-orange-900/40
+            backdrop-blur-xl
+            border
+            border-orange-300/20
+            shadow-2xl
+          "
+        >
+
+          {/* LOGO */}
+
+          <div className="p-2 border-b border-orange-300/10">
+
+            <h1 className="text-2xl font-bold text-white">
+              Media
+              <span className="text-orange-400">
+                Lend
+              </span>
+            </h1>
+
+            <p className="text-white/70">
+              Dashboard Admin
+            </p>
+
+          </div>
+
+          {/* PROFILE */}
+
+          <div className="p-1">
+
+            <div
+              className="
+                p-2
+                rounded-lg
+                bg-orange-500/15
+                border
+                border-orange-300/20
+                flex
+                items-center
+                gap-3
+              "
+            >
+
+              <FiUser className="text-xl text-orange-200" />
+
+              <div>
+
+                <p className="font-semibold text-white">
+                  {admin || "Administrator"}
+                </p>
+
+                <p className="text-orange-200 text-sm">
+                  Administrator
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          {/* MENU */}
+
+          <div className="p-2 pt-0">
+
+            <div
+              id="mobile-menu-scroll"
+              className="
+                w-full
+                overflow-x-auto
+                overflow-y-hidden
+                [&::-webkit-scrollbar]:hidden
+              "
+              style={{
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
+              }}
+              onScroll={(e) => {
+
+                sessionStorage.setItem(
+                  "mobileMenuScroll",
+                  e.target.scrollLeft
+                );
+
+              }}
+            >
+
+              <div className="flex gap-3 min-w-max pb-2">
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiHome />}
+                    label="Dashboard"
+                    onClick={() =>
+                      navigate("/dashboard-admin")
+                    }
+                  />
+                </div>
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiBox />}
+                    label="Alat"
+                    onClick={() =>
+                      navigate("/manajemen-alat")
+                    }
+                  />
+                </div>
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiClipboard />}
+                    label="Pengajuan"
+                    active
+                    onClick={() =>
+                      navigate("/pengajuan")
+                    }
+                  />
+                </div>
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiRotateCcw />}
+                    label="Kembali"
+                    onClick={() =>
+                      navigate("/pengembalian")
+                    }
+                  />
+                </div>
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiClock />}
+                    label="Riwayat"
+                    onClick={() =>
+                      navigate("/riwayat-admin")
+                    }
+                  />
+                </div>
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiUsers />}
+                    label="Mahasiswa"
+                    onClick={() =>
+                      navigate("/mahasiswa")
+                    }
+                  />
+                </div>
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiLogOut />}
+                    label="Logout"
+                    onClick={handleLogout}
+                  />
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
       {/* CONTENT */}
-      <div className="relative flex-1 p-6 text-white flex flex-col gap-4 overflow-hidden">
+      <div className="hidden lg:flex relative flex-1 p-6 text-white flex-col gap-4 overflow-hidden">
 
         {/* HEADER */}
         <div className="bg-white/20 backdrop-blur-xl border border-white/20 p-5 rounded-2xl flex justify-between items-center">
@@ -302,7 +518,7 @@ export default function Pengajuan() {
           </div>
 
           <span className="text-xs text-green-400">
-            ● Admin Aktif
+            ● Online
           </span>
         </div>
 
@@ -466,6 +682,185 @@ export default function Pengajuan() {
 
       </div>
 
+      {/* ================= CONTENT MOBILE ================= */}
+
+      <div
+        className="
+          lg:hidden
+          relative
+          z-20
+          px-4
+          pb-6
+          text-white
+        "
+      >
+
+        {/* HEADER */}
+
+        <div className="bg-white/20 backdrop-blur-xl border border-white/20 rounded-3xl p-4 mb-3">
+
+          <h1 className="text-lg font-bold">
+            Pengajuan Peminjaman
+          </h1>
+
+          <p className="text-xs text-white/60">
+            Semua pengajuan peminjaman mahasiswa
+          </p>
+
+        </div>
+
+        {/* LIST PENGAJUAN */}
+
+        <div className="bg-white/20 backdrop-blur-xl border border-white/20 rounded-3xl p-4">
+
+          {pengajuan.length === 0 ? (
+
+            <div className="text-center py-8">
+
+              <FiCheckCircle className="text-5xl mx-auto mb-3 text-orange-300" />
+
+              <p className="font-semibold">
+                Belum Ada Pengajuan
+              </p>
+
+              <p className="text-xs text-white/50 mt-2">
+                Pengajuan mahasiswa akan tampil di sini
+              </p>
+
+            </div>
+
+          ) : (
+
+            <div className="space-y-3">
+
+              {pengajuan.map((item) => (
+
+                <div
+                  key={item.id}
+                  className="
+                    bg-white/10
+                    border
+                    border-white/10
+                    rounded-2xl
+                    p-4
+                  "
+                >
+
+                  {/* MAHASISWA */}
+
+                  <div className="mb-3">
+
+                    <p className="font-semibold">
+                      {item.Mahasiswa?.nama || "-"}
+                    </p>
+
+                    <p className="text-xs text-white/60">
+                      NIM :
+                      {" "}
+                      {item.Mahasiswa?.nim || "-"}
+                    </p>
+
+                  </div>
+
+                  {/* ALAT */}
+
+                  <div className="mb-3">
+
+                    <p className="text-sm text-white/70">
+                      Alat
+                    </p>
+
+                    <p className="font-medium">
+                      {item.Alat?.nama_alat || "-"}
+                    </p>
+
+                  </div>
+
+                  {/* STATUS */}
+
+                  <span
+                    className={`inline-block px-3 py-1 rounded-full text-xs
+                    ${
+                      item.status === "pending"
+                        ? "bg-yellow-500 text-black"
+                        : item.status === "dipinjam"
+                        ? "bg-orange-500 text-white"
+                        : item.status === "ditolak"
+                        ? "bg-red-500 text-white"
+                        : "bg-green-500 text-white"
+                    }`}
+                  >
+                    {item.status}
+                  </span>
+
+                  {/* TANGGAL */}
+
+                  <p className="text-xs text-white/50 mt-3">
+
+                    {new Date(
+                      item.createdAt
+                    ).toLocaleDateString(
+                      "id-ID"
+                    )}
+
+                  </p>
+
+                  {/* AKSI */}
+
+                  {item.status === "pending" && (
+
+                    <div className="flex gap-2 mt-4">
+
+                      <button
+                        onClick={() =>
+                          handleTerima(item.id)
+                        }
+                        className="
+                          flex-1
+                          bg-green-500
+                          hover:bg-green-600
+                          py-2
+                          rounded-xl
+                          text-sm
+                          font-medium
+                        "
+                      >
+                        Terima
+                      </button>
+
+                      <button
+                        onClick={() =>
+                          handleTolak(item.id)
+                        }
+                        className="
+                          flex-1
+                          bg-red-500
+                          hover:bg-red-600
+                          py-2
+                          rounded-xl
+                          text-sm
+                          font-medium
+                        "
+                      >
+                        Tolak
+                      </button>
+
+                    </div>
+
+                  )}
+
+                </div>
+
+              ))}
+
+            </div>
+
+          )}
+
+        </div>
+
+      </div>
+
     </div>
   );
 }
@@ -489,6 +884,40 @@ function SidebarItem({
     >
       {icon}
       {label}
+    </div>
+  );
+}
+
+/* ================= SIDEBAR MOBILE ================= */
+
+function MobileMenuItem({
+  icon,
+  label,
+  active,
+  onClick,
+}) {
+  return (
+    <div
+      onClick={onClick}
+      className={`
+        flex items-center gap-2
+        px-4 py-2
+        rounded-xl
+        whitespace-nowrap
+        cursor-pointer
+        transition
+        ${
+          active
+            ? "bg-orange-500 text-white shadow-md"
+            : "bg-white/10 text-white hover:bg-white/20"
+        }
+      `}
+    >
+      {icon}
+
+      <span className="text-sm">
+        {label}
+      </span>
     </div>
   );
 }

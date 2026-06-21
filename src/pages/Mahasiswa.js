@@ -66,6 +66,30 @@ export default function Mahasiswa() {
     }
   }, []);
 
+
+  /* ================= MOBILE MENU SCROLL ================= */
+
+useEffect(() => {
+
+  const menu =
+    document.getElementById(
+      "mobile-menu-scroll"
+    );
+
+  const saved =
+    sessionStorage.getItem(
+      "mobileMenuScroll"
+    );
+
+  if (menu && saved) {
+
+    menu.scrollLeft =
+      parseInt(saved);
+
+  }
+
+}, []);
+
   /* ================= FETCH ================= */
 
   useEffect(() => {
@@ -114,12 +138,28 @@ export default function Mahasiswa() {
   if (!token) return null;
 
   return (
-    <div className="flex h-screen overflow-hidden">
+   <div
+      className="
+        flex
+        flex-col
+        lg:flex-row
+        min-h-screen
+        lg:h-screen
+        overflow-x-hidden
+        lg:overflow-hidden
+      "
+    >
 
       {/* BACKGROUND */}
 
       <div
-        className="absolute inset-0 bg-[length:90%] bg-center bg-no-repeat"
+        className="
+          fixed
+          inset-0
+          bg-center
+          bg-no-repeat
+          bg-cover
+        "
         style={{
           backgroundImage:
             `url(${kampus})`,
@@ -128,8 +168,10 @@ export default function Mahasiswa() {
 
       {/* OVERLAY */}
 
-      <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-orange-700/40 to-black/80" />
-      <div className="relative w-72 h-screen flex flex-col backdrop-blur-xl bg-gradient-to-b from-orange-600/40 via-orange-500/30 to-orange-800/40 border-r border-orange-300/30 text-white">
+      <div className="fixed inset-0 bg-gradient-to-br from-black/70 via-orange-700/40 to-black/80" />
+
+      <div className="hidden lg:flex relative w-72 h-screen flex-col backdrop-blur-xl bg-gradient-to-b from-orange-600/40 via-orange-500/30 to-orange-800/40 border-r border-orange-300/30 text-white">
+
         <div className="p-6 border-b border-orange-200/20">
 
           <h1 className="text-2xl font-bold">
@@ -271,9 +313,187 @@ export default function Mahasiswa() {
 
       </div>
 
-      {/* CONTENT */}
+      {/* MOBILE ONLY */}
 
-      <div className="relative flex-1 p-6 flex flex-col text-white overflow-hidden">
+      <div className="lg:hidden relative z-20 p-4 w-full">
+
+        <div
+          className="
+            w-full
+            rounded-3xl
+            bg-gradient-to-br
+            from-orange-700/40
+            via-orange-600/20
+            to-orange-900/40
+            backdrop-blur-xl
+            border
+            border-orange-300/20
+            shadow-2xl
+          "
+        >
+
+          {/* LOGO */}
+
+          <div className="p-2 border-b border-orange-300/10">
+
+            <h1 className="text-2xl font-bold text-white">
+              Media
+              <span className="text-orange-400">
+                Lend
+              </span>
+            </h1>
+
+            <p className="text-white/70">
+              Dashboard Admin
+            </p>
+
+          </div>
+
+          {/* PROFILE */}
+
+          <div className="p-1">
+
+            <div
+              className="
+                p-2
+                rounded-lg
+                bg-orange-500/15
+                border
+                border-orange-300/20
+                flex
+                items-center
+                gap-3
+              "
+            >
+
+              <FiUser className="text-xl text-orange-200" />
+
+              <div>
+
+                <p className="font-semibold text-white">
+                  {admin || "Administrator"}
+                </p>
+
+                <p className="text-orange-200 text-sm">
+                  Administrator
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          {/* MENU */}
+
+          <div className="p-2 pt-0">
+
+            <div
+              id="mobile-menu-scroll"
+              className="
+                w-full
+                overflow-x-auto
+                overflow-y-hidden
+                [&::-webkit-scrollbar]:hidden
+              "
+              style={{
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
+              }}
+              onScroll={(e) => {
+
+                sessionStorage.setItem(
+                  "mobileMenuScroll",
+                  e.target.scrollLeft
+                );
+
+              }}
+            >
+
+              <div className="flex gap-3 min-w-max pb-2">
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiHome />}
+                    label="Dashboard"
+                    onClick={() =>
+                      navigate("/dashboard-admin")
+                    }
+                  />
+                </div>
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiBox />}
+                    label="Alat"
+                    onClick={() =>
+                      navigate("/manajemen-alat")
+                    }
+                  />
+                </div>
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiClipboard />}
+                    label="Pengajuan"
+                    onClick={() =>
+                      navigate("/pengajuan")
+                    }
+                  />
+                </div>
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiRotateCcw />}
+                    label="Kembali"
+                    onClick={() =>
+                      navigate("/pengembalian")
+                    }
+                  />
+                </div>
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiClock />}
+                    label="Riwayat"
+                    onClick={() =>
+                      navigate("/riwayat-admin")
+                    }
+                  />
+                </div>
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiUsers />}
+                    label="Mahasiswa"
+                    active
+                    onClick={() =>
+                      navigate("/mahasiswa")
+                    }
+                  />
+                </div>
+
+                <div className="flex-shrink-0">
+                  <MobileMenuItem
+                    icon={<FiLogOut />}
+                    label="Logout"
+                    onClick={handleLogout}
+                  />
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      {/* CONTENT DESKTOP */}
+
+       <div className="hidden lg:flex relative flex-1 p-6 flex-col text-white overflow-hidden">
 
         {/* HEADER */}
 
@@ -362,12 +582,99 @@ export default function Mahasiswa() {
             )}
 
           </div>
+        </div>
+        
+    </div>
+
+        {/* CONTENT MOBILE */}
+
+        <div className="lg:hidden relative z-20 px-4 pb-6 text-white">
+
+          <div className="bg-white/20 backdrop-blur-xl border border-white/20 rounded-3xl p-4">
+
+            <div className="flex justify-between items-center mb-4">
+
+              <div>
+
+                <h1 className="text-lg font-bold">
+                  Data Mahasiswa
+                </h1>
+
+                <p className="text-xs text-white/60">
+                  Semua data mahasiswa terdaftar
+                </p>
+
+              </div>
+
+              <span className="bg-orange-500/20 border border-orange-300/30 px-3 py-1 rounded-xl text-xs text-orange-200">
+
+                {mahasiswa.length}
+
+              </span>
+
+            </div>
+
+            {mahasiswa.length === 0 ? (
+
+              <div className="text-center py-8 text-white/60">
+
+                <FiUsers className="text-5xl mx-auto mb-3 text-orange-300" />
+
+                <p className="font-semibold">
+                  Belum ada data mahasiswa
+                </p>
+
+              </div>
+
+            ) : (
+
+              <div className="space-y-3">
+
+                {mahasiswa.map((item, i) => (
+
+                  <div
+                    key={i}
+                    className="
+                      bg-white/10
+                      border
+                      border-white/10
+                      rounded-2xl
+                      p-4
+                    "
+                  >
+
+                    <p className="font-semibold text-lg">
+
+                      {item.nama}
+
+                    </p>
+
+                    <p className="text-sm text-white/60 mt-1">
+
+                      NIM : {item.nim}
+
+                    </p>
+
+                    <p className="text-sm text-white/50 mt-2 break-all">
+
+                      {item.email || "-"}
+
+                    </p>
+
+                  </div>
+
+                ))}
+
+              </div>
+
+            )}
+
+          </div>
 
         </div>
 
       </div>
 
-    </div>
   );
 }
 
@@ -394,6 +701,40 @@ function SidebarItem({
 
       {label}
 
+    </div>
+  );
+}
+
+/* ================= SIDEBAR MOBILE ================= */
+
+function MobileMenuItem({
+  icon,
+  label,
+  active,
+  onClick,
+}) {
+  return (
+    <div
+      onClick={onClick}
+      className={`
+        flex items-center gap-2
+        px-4 py-2
+        rounded-xl
+        whitespace-nowrap
+        cursor-pointer
+        transition
+        ${
+          active
+            ? "bg-orange-500 text-white shadow-md"
+            : "bg-white/10 text-white hover:bg-white/20"
+        }
+      `}
+    >
+      {icon}
+
+      <span className="text-sm">
+        {label}
+      </span>
     </div>
   );
 }
