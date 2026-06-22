@@ -4,8 +4,8 @@ Aplikasi peminjaman alat multimedia kampus berbasis React.js.
 
 ## Tim Pengembang
 - Sri Wahyuningsih A
-- Nama Anggota 2
-- Nama Anggota 3
+- Elsa Febriyanti
+- Indah  Ayu Anastasya
 
 ## Teknologi
 - React.js
